@@ -5,6 +5,7 @@
 'use strict'
 const express = require('express')
 const router = express.Router()
+const Publisher = require('../models/Publisher')
 
 const DUMMY = { message: 'ok' }
 
@@ -20,6 +21,8 @@ router.get('/', async (req, res, next) => {
     } else {
       console.log('STRING or undefined', area)
     }
+    const publishers = await Publisher.findAll()
+    console.log(publishers)
     return res.json(DUMMY)
   } catch (e) {
     console.error(e)

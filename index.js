@@ -39,6 +39,7 @@ app.use((err, req, res, _) => {
   })
 })
 
+// Custom 404 in JSON
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' })
 })
