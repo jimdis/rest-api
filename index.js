@@ -3,8 +3,13 @@ const express = require('express')
 const compression = require('compression')
 const cors = require('cors')
 const morgan = require('morgan')
-
+const db = require('./config/db')
 const app = express()
+
+// Test DB
+db.authenticate()
+  .then(() => console.log('Database connected...'))
+  .catch(err => console.log('Error: ' + err))
 
 // Middle-ware
 if (process.env.NODE_ENV !== 'production') {
