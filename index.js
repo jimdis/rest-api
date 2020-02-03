@@ -21,6 +21,8 @@ app.use(cors())
 
 // Routes
 app.use('/ads', require('./routes/ads'))
+app.use('/publishers', require('./routes/publishers'))
+app.use('/areas', require('./routes/areas'))
 
 // Error handler. Catches errors and sends 500 Internal Server Error.
 // Needs 4 arguments to work as middleware with error handling, even though last arg is not used...
@@ -30,6 +32,10 @@ app.use((err, req, res, _) => {
   res.status(500).json({
     msg: err.clientMsg || 'Något gick fel...',
   })
+})
+
+app.use((req, res) => {
+  res.status(404).json({ message: 'Not found' })
 })
 
 const port = process.env.PORT || 5000

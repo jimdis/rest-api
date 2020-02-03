@@ -1,5 +1,5 @@
 /**
- * API controllers for /ads route
+ * API controllers for /publishers route
  */
 
 'use strict'
@@ -8,17 +8,17 @@ const router = express.Router()
 
 const DUMMY = { message: 'ok' }
 
-// @route   GET /ads
-// @desc    Get all ads, possibly filtered with query string params publisher & area
+// @route   GET /publishers
+// @desc    Get all publishers, possibly filtered with query string param area
 // @access  Public
 router.get('/', async (req, res, next) => {
   try {
-    const publisher = req.query.publisher
     const area = req.query.area
-    if (typeof publisher === 'object' && publisher.length) {
-      console.log('ARRAY!', publisher)
+    console.log(typeof area)
+    if (typeof area === 'object' && area.length) {
+      console.log('ARRAY!', area)
     } else {
-      console.log('STRING! or undefined', publisher)
+      console.log('STRING or undefined', area)
     }
     return res.json(DUMMY)
   } catch (e) {
@@ -27,8 +27,8 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// @route   GET /ads/:id
-// @desc    Get ad based on ID
+// @route   GET /publishers/:id
+// @desc    Get publisher based on ID
 // @access  Public
 router.get('/:id', async (req, res, next) => {
   try {
@@ -40,8 +40,21 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-// @route   POST /ads
-// @desc    Post new ad
+// @route   GET /publishers/:id/details
+// @desc    Get private publisher details based on ID
+// @access  Private
+router.get('/:id/details', async (req, res, next) => {
+  try {
+    console.log('ID!', req.params.id)
+    return res.json(DUMMY)
+  } catch (e) {
+    console.error(e)
+    next()
+  }
+})
+
+// @route   POST /publishers
+// @desc    Post new publisher
 // @access  Private
 router.post('/', async (req, res, next) => {
   try {
@@ -53,8 +66,8 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-// @route   DELETE /ads/:id
-// @desc    Deletes ad with id
+// @route   DELETE /publisher/:id
+// @desc    Deletes publisher with id
 // @access  Private
 router.delete('/:id', async (req, res, next) => {
   try {
@@ -66,8 +79,8 @@ router.delete('/:id', async (req, res, next) => {
   }
 })
 
-// @route   PATCH /ads/:id
-// @desc    Patches ad with id
+// @route   PATCH /publishers/:id
+// @desc    Patches publishers with id
 // @access  Private
 router.patch('/:id', async (req, res, next) => {
   try {
