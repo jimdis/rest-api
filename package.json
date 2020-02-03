@@ -1,0 +1,9 @@
+{
+  "name": "1dv527-api",
+  "version": "1.0.0",
+  "description": "Assignment 2, course 1dv527",
+  "main": "index.js",
+  "repository": "https://github.com/jimdis/1dv527-api.git",
+  "author": "Jim Disenstam",
+  "license": "MIT"
+}
