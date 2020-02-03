@@ -19,6 +19,9 @@ app.use(
 app.use(compression())
 app.use(cors())
 
+// Routes
+app.use('/ads', require('./routes/ads'))
+
 // Error handler. Catches errors and sends 500 Internal Server Error.
 // Needs 4 arguments to work as middleware with error handling, even though last arg is not used...
 // eslint-disable-next-line no-unused-vars
