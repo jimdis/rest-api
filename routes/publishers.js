@@ -5,7 +5,16 @@
 'use strict'
 const express = require('express')
 const router = express.Router()
+const bcrypt = require('bcryptjs')
+const passwordValidator = require('password-validator')
 const Publisher = require('../models/Publisher')
+
+const passwordSchema = new passwordValidator()
+passwordSchema.is().min(8)
+passwordSchema.is().max(100)
+passwordSchema.has().uppercase()
+passwordSchema.has().lowercase()
+passwordSchema.has().digits()
 
 const DUMMY = { message: 'ok' }
 
@@ -57,12 +66,33 @@ router.get('/:id/details', async (req, res, next) => {
 // @access  Private
 router.post('/', async (req, res, next) => {
   try {
-    const { name, email } = req.body
+    const { name, email, password } = req.body
+    if (!name || !email || !password) {
+      return res.status(422).json({
+        msg: 'Missing one or several required fields',
+      })
+    }
+    if (!passwordSchema.validate(password)) {
+      return res.status(422).json({
+        msg:
+          'Password must be at least 8 chars, max 100 chars, one lowercase, one uppercase, one digit.',
+      })
+    }
+    const passwordHash = await bcrypt.hash(password, 12)
+
     const publisher = await Publisher.create({
       name,
       email,
+      password: passwordHash,
     })
-    return res.json(publisher)
+    return res.json({
+      msg: 'Successfully created new publisher',
+      fields: {
+        id: publisher.id,
+        name: publisher.name,
+        email: publisher.email,
+      },
+    })
   } catch (e) {
     console.log('STATUSCODE!', e.statusCode)
     next(e)

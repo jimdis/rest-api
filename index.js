@@ -30,14 +30,17 @@ app.use('/ads', require('./routes/ads'))
 app.use('/publishers', require('./routes/publishers'))
 app.use('/areas', require('./routes/areas'))
 
-// Error handler. Catches errors and sends 500 Internal Server Error.
+// Error handler. Catches errors and sends 500 Internal Server Error for non-specific errors.
 // Needs 4 arguments to work as middleware with error handling, even though last arg is not used...
 // eslint-disable-next-line no-unused-vars
-app.use((err, req, res, next) => {
-  console.error(err)
+app.use((err, req, res, _) => {
+  if (err.statusCode) {
+    return res.status(err.statusCode).json({ msg: err.message })
+  }
   if (err instanceof Sequelize.ValidationError) {
     return res.status(422).json({ msg: err.message })
   }
+  console.error(err)
   res.status(500).json({
     msg: err.clientMsg || 'Något gick fel...',
   })
