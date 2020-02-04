@@ -3,6 +3,7 @@ const express = require('express')
 const compression = require('compression')
 const cors = require('cors')
 const morgan = require('morgan')
+const Sequelize = require('sequelize')
 const db = require('./config/db')
 const app = express()
 
@@ -32,8 +33,11 @@ app.use('/areas', require('./routes/areas'))
 // Error handler. Catches errors and sends 500 Internal Server Error.
 // Needs 4 arguments to work as middleware with error handling, even though last arg is not used...
 // eslint-disable-next-line no-unused-vars
-app.use((err, req, res, _) => {
+app.use((err, req, res, next) => {
   console.error(err)
+  if (err instanceof Sequelize.ValidationError) {
+    return res.status(422).json({ msg: err.message })
+  }
   res.status(500).json({
     msg: err.clientMsg || 'Något gick fel...',
   })

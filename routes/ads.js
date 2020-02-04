@@ -22,8 +22,7 @@ router.get('/', async (req, res, next) => {
     }
     return res.json(DUMMY)
   } catch (e) {
-    console.error(e)
-    next()
+    next(e)
   }
 })
 
@@ -35,8 +34,7 @@ router.get('/:id', async (req, res, next) => {
     console.log('ID!', req.params.id)
     return res.json(DUMMY)
   } catch (e) {
-    console.error(e)
-    next()
+    next(e)
   }
 })
 
@@ -48,8 +46,7 @@ router.post('/', async (req, res, next) => {
     console.log('POST BODY', req.body)
     return res.json(DUMMY)
   } catch (e) {
-    console.error(e)
-    next()
+    next(e)
   }
 })
 
@@ -61,8 +58,7 @@ router.delete('/:id', async (req, res, next) => {
     console.log('DELETE ID', req.params.id)
     return res.json(DUMMY)
   } catch (e) {
-    console.error(e)
-    next()
+    next(e)
   }
 })
 
@@ -74,8 +70,7 @@ router.patch('/:id', async (req, res, next) => {
     console.log('PATCH ID', req.params.id)
     return res.json(DUMMY)
   } catch (e) {
-    console.error(e)
-    next()
+    next(e)
   }
 })
 

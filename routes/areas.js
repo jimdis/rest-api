@@ -15,8 +15,7 @@ router.get('/', async (req, res, next) => {
   try {
     return res.json(DUMMY)
   } catch (e) {
-    console.error(e)
-    next()
+    next(e)
   }
 })
 

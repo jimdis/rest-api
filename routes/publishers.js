@@ -22,11 +22,9 @@ router.get('/', async (req, res, next) => {
       console.log('STRING or undefined', area)
     }
     const publishers = await Publisher.findAll()
-    console.log(publishers)
-    return res.json(DUMMY)
+    return res.json({ items: publishers })
   } catch (e) {
-    console.error(e)
-    next()
+    next(e)
   }
 })
 
@@ -38,8 +36,7 @@ router.get('/:id', async (req, res, next) => {
     console.log('ID!', req.params.id)
     return res.json(DUMMY)
   } catch (e) {
-    console.error(e)
-    next()
+    next(e)
   }
 })
 
@@ -51,8 +48,7 @@ router.get('/:id/details', async (req, res, next) => {
     console.log('ID!', req.params.id)
     return res.json(DUMMY)
   } catch (e) {
-    console.error(e)
-    next()
+    next(e)
   }
 })
 
@@ -61,11 +57,15 @@ router.get('/:id/details', async (req, res, next) => {
 // @access  Private
 router.post('/', async (req, res, next) => {
   try {
-    console.log('POST BODY', req.body)
-    return res.json(DUMMY)
+    const { name, email } = req.body
+    const publisher = await Publisher.create({
+      name,
+      email,
+    })
+    return res.json(publisher)
   } catch (e) {
-    console.error(e)
-    next()
+    console.log('STATUSCODE!', e.statusCode)
+    next(e)
   }
 })
 
@@ -77,8 +77,7 @@ router.delete('/:id', async (req, res, next) => {
     console.log('DELETE ID', req.params.id)
     return res.json(DUMMY)
   } catch (e) {
-    console.error(e)
-    next()
+    next(e)
   }
 })
 
@@ -90,8 +89,7 @@ router.patch('/:id', async (req, res, next) => {
     console.log('PATCH ID', req.params.id)
     return res.json(DUMMY)
   } catch (e) {
-    console.error(e)
-    next()
+    next(e)
   }
 })
 

@@ -7,7 +7,7 @@
   "author": "Jim Disenstam",
   "license": "MIT",
   "scripts": {
-    "start-db": "docker run -d -p 5432:5432 -v postgres-data:/var/lib/postgresql/data -e POSTGRES_PASSWORD=docker —name postgres-docker postgres",
+    "start-db": "docker run -d -p 5432:5432 -v postgres-data:/var/lib/postgresql/data -e POSTGRES_PASSWORD=docker --name postgres-docker postgres",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
