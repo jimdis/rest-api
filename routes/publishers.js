@@ -42,8 +42,13 @@ router.get('/', async (req, res, next) => {
 // @access  Public
 router.get('/:id', async (req, res, next) => {
   try {
-    console.log('ID!', req.params.id)
-    return res.json(DUMMY)
+    const publisher = await Publisher.findByPk(req.params.id, {
+      attributes: ['id', 'name'],
+    })
+    if (!publisher) {
+      return res.status(404)
+    }
+    return res.json(publisher)
   } catch (e) {
     next(e)
   }
