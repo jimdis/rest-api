@@ -33,9 +33,9 @@ router.get('/', async (req, res, next) => {
 // @access  Public
 router.get('/:id', async (req, res, next) => {
   try {
-    const publisher = await Publisher.findById(req.params.id, '_id name')
+    const publisher = await Publisher.findById(req.params.id, 'name')
     if (!publisher) {
-      next()
+      return next()
     }
     return res.json(publisher)
   } catch (e) {

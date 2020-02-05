@@ -19,4 +19,19 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// @route   GET /areas/:id
+// @desc    Get area based on ID
+// @access  Public
+router.get('/:id', async (req, res, next) => {
+  try {
+    const area = await Area.findById(req.params.id, 'name population')
+    if (!area) {
+      return next()
+    }
+    return res.json(area)
+  } catch (e) {
+    next(e)
+  }
+})
+
 module.exports = router
