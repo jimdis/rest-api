@@ -49,7 +49,7 @@ app.use((err, req, res, _) => {
   }
   logger.error(err)
   res.status(500).json({
-    msg: err.clientMsg || 'Något gick fel...',
+    msg: err.clientMsg || 'Oops, something went wrong..',
   })
 })
 

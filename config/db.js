@@ -2,6 +2,7 @@
 const mongoose = require('mongoose')
 const logger = require('./logger')
 require('../models/Publisher')
+require('../models/Area')
 
 /**
  * Establishes a connection to a database.

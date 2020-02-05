@@ -5,15 +5,15 @@
 'use strict'
 const express = require('express')
 const router = express.Router()
-
-const DUMMY = { message: 'ok' }
+const Area = require('../models/Area')
 
 // @route   GET /areas
 // @desc    Get all areas
 // @access  Public
 router.get('/', async (req, res, next) => {
   try {
-    return res.json(DUMMY)
+    const areas = await Area.find({}, 'name population')
+    return res.json({ items: areas })
   } catch (e) {
     next(e)
   }
