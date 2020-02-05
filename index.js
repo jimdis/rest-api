@@ -4,8 +4,10 @@ const express = require('express')
 const compression = require('compression')
 const cors = require('cors')
 const morgan = require('morgan')
+const mongoose = require('mongoose')
 const db = require('./config/db')
 const logger = require('./config/logger')
+const validationError = require('./config/constants').VALIDATION_ERROR
 const app = express()
 
 // connect to the database
@@ -39,7 +41,12 @@ app.use((err, req, res, _) => {
   if (err.statusCode) {
     return res.status(err.statusCode).json({ msg: err.message })
   }
-  //TODO: add checking for validation errors & send appropriate response.
+  if (
+    err instanceof mongoose.Error.ValidationError ||
+    err.name === validationError
+  ) {
+    res.status(422).json({ msg: err.message })
+  }
   logger.error(err)
   res.status(500).json({
     msg: err.clientMsg || 'Något gick fel...',

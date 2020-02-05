@@ -1,0 +1,1452 @@
+[
+        {
+            "kommun": "Ale",
+            "kommunkod": "1440",
+            "folkmängd 31 december 2018": "30 926"
+        },
+        {
+            "kommun": "Alingsås",
+            "kommunkod": "1489",
+            "folkmängd 31 december 2018": "41 070"
+        },
+        {
+            "kommun": "Alvesta",
+            "kommunkod": "0764",
+            "folkmängd 31 december 2018": "20 150"
+        },
+        {
+            "kommun": "Aneby",
+            "kommunkod": "0604",
+            "folkmängd 31 december 2018": "6 832"
+        },
+        {
+            "kommun": "Arboga",
+            "kommunkod": "1984",
+            "folkmängd 31 december 2018": "14 138"
+        },
+        {
+            "kommun": "Arjeplog",
+            "kommunkod": "2506",
+            "folkmängd 31 december 2018": "2 794"
+        },
+        {
+            "kommun": "Arvidsjaur",
+            "kommunkod": "2505",
+            "folkmängd 31 december 2018": "6 334"
+        },
+        {
+            "kommun": "Arvika",
+            "kommunkod": "1784",
+            "folkmängd 31 december 2018": "26 082"
+        },
+        {
+            "kommun": "Askersund",
+            "kommunkod": "1882",
+            "folkmängd 31 december 2018": "11 313"
+        },
+        {
+            "kommun": "Avesta",
+            "kommunkod": "2084",
+            "folkmängd 31 december 2018": "23 323"
+        },
+        {
+            "kommun": "Bengtsfors",
+            "kommunkod": "1460",
+            "folkmängd 31 december 2018": "9 846"
+        },
+        {
+            "kommun": "Berg",
+            "kommunkod": "2326",
+            "folkmängd 31 december 2018": "7 097"
+        },
+        {
+            "kommun": "Bjurholm",
+            "kommunkod": "2403",
+            "folkmängd 31 december 2018": "2 450"
+        },
+        {
+            "kommun": "Bjuv",
+            "kommunkod": "1260",
+            "folkmängd 31 december 2018": "15 501"
+        },
+        {
+            "kommun": "Boden",
+            "kommunkod": "2582",
+            "folkmängd 31 december 2018": "28 064"
+        },
+        {
+            "kommun": "Bollebygd",
+            "kommunkod": "1443",
+            "folkmängd 31 december 2018": "9 427"
+        },
+        {
+            "kommun": "Bollnäs",
+            "kommunkod": "2183",
+            "folkmängd 31 december 2018": "26 991"
+        },
+        {
+            "kommun": "Borgholm",
+            "kommunkod": "0885",
+            "folkmängd 31 december 2018": "10 873"
+        },
+        {
+            "kommun": "Borlänge",
+            "kommunkod": "2081",
+            "folkmängd 31 december 2018": "52 224"
+        },
+        {
+            "kommun": "Borås",
+            "kommunkod": "1490",
+            "folkmängd 31 december 2018": "112 178"
+        },
+        {
+            "kommun": "Botkyrka",
+            "kommunkod": "0127",
+            "folkmängd 31 december 2018": "93 106"
+        },
+        {
+            "kommun": "Boxholm",
+            "kommunkod": "0560",
+            "folkmängd 31 december 2018": "5 449"
+        },
+        {
+            "kommun": "Bromölla",
+            "kommunkod": "1272",
+            "folkmängd 31 december 2018": "12 876"
+        },
+        {
+            "kommun": "Bräcke",
+            "kommunkod": "2305",
+            "folkmängd 31 december 2018": "6 376"
+        },
+        {
+            "kommun": "Burlöv",
+            "kommunkod": "1231",
+            "folkmängd 31 december 2018": "18 360"
+        },
+        {
+            "kommun": "Båstad",
+            "kommunkod": "1278",
+            "folkmängd 31 december 2018": "14 948"
+        },
+        {
+            "kommun": "Dals-Ed",
+            "kommunkod": "1438",
+            "folkmängd 31 december 2018": "4 806"
+        },
+        {
+            "kommun": "Danderyd",
+            "kommunkod": "0162",
+            "folkmängd 31 december 2018": "33 187"
+        },
+        {
+            "kommun": "Degerfors",
+            "kommunkod": "1862",
+            "folkmängd 31 december 2018": "9 665"
+        },
+        {
+            "kommun": "Dorotea",
+            "kommunkod": "2425",
+            "folkmängd 31 december 2018": "2 568"
+        },
+        {
+            "kommun": "Eda",
+            "kommunkod": "1730",
+            "folkmängd 31 december 2018": "8 575"
+        },
+        {
+            "kommun": "Ekerö",
+            "kommunkod": "0125",
+            "folkmängd 31 december 2018": "28 308"
+        },
+        {
+            "kommun": "Eksjö",
+            "kommunkod": "0686",
+            "folkmängd 31 december 2018": "17 667"
+        },
+        {
+            "kommun": "Emmaboda",
+            "kommunkod": "0862",
+            "folkmängd 31 december 2018": "9 400"
+        },
+        {
+            "kommun": "Enköping",
+            "kommunkod": "0381",
+            "folkmängd 31 december 2018": "44 429"
+        },
+        {
+            "kommun": "Eskilstuna",
+            "kommunkod": "0484",
+            "folkmängd 31 december 2018": "105 924"
+        },
+        {
+            "kommun": "Eslöv",
+            "kommunkod": "1285",
+            "folkmängd 31 december 2018": "33 557"
+        },
+        {
+            "kommun": "Essunga",
+            "kommunkod": "1445",
+            "folkmängd 31 december 2018": "5 671"
+        },
+        {
+            "kommun": "Fagersta",
+            "kommunkod": "1982",
+            "folkmängd 31 december 2018": "13 464"
+        },
+        {
+            "kommun": "Falkenberg",
+            "kommunkod": "1382",
+            "folkmängd 31 december 2018": "44 701"
+        },
+        {
+            "kommun": "Falköping",
+            "kommunkod": "1499",
+            "folkmängd 31 december 2018": "33 155"
+        },
+        {
+            "kommun": "Falun",
+            "kommunkod": "2080",
+            "folkmängd 31 december 2018": "58 923"
+        },
+        {
+            "kommun": "Filipstad",
+            "kommunkod": "1782",
+            "folkmängd 31 december 2018": "10 837"
+        },
+        {
+            "kommun": "Finspång",
+            "kommunkod": "0562",
+            "folkmängd 31 december 2018": "21 758"
+        },
+        {
+            "kommun": "Flen",
+            "kommunkod": "0482",
+            "folkmängd 31 december 2018": "16 705"
+        },
+        {
+            "kommun": "Forshaga",
+            "kommunkod": "1763",
+            "folkmängd 31 december 2018": "11 518"
+        },
+        {
+            "kommun": "Färgelanda",
+            "kommunkod": "1439",
+            "folkmängd 31 december 2018": "6 602"
+        },
+        {
+            "kommun": "Gagnef",
+            "kommunkod": "2026",
+            "folkmängd 31 december 2018": "10 271"
+        },
+        {
+            "kommun": "Gislaved",
+            "kommunkod": "0662",
+            "folkmängd 31 december 2018": "29 857"
+        },
+        {
+            "kommun": "Gnesta",
+            "kommunkod": "0461",
+            "folkmängd 31 december 2018": "11 237"
+        },
+        {
+            "kommun": "Gnosjö",
+            "kommunkod": "0617",
+            "folkmängd 31 december 2018": "9 776"
+        },
+        {
+            "kommun": "Gotland",
+            "kommunkod": "0980",
+            "folkmängd 31 december 2018": "59 249"
+        },
+        {
+            "kommun": "Grums",
+            "kommunkod": "1764",
+            "folkmängd 31 december 2018": "9 016"
+        },
+        {
+            "kommun": "Grästorp",
+            "kommunkod": "1444",
+            "folkmängd 31 december 2018": "5 731"
+        },
+        {
+            "kommun": "Gullspång",
+            "kommunkod": "1447",
+            "folkmängd 31 december 2018": "5 293"
+        },
+        {
+            "kommun": "Gällivare",
+            "kommunkod": "2523",
+            "folkmängd 31 december 2018": "17 630"
+        },
+        {
+            "kommun": "Gävle",
+            "kommunkod": "2180",
+            "folkmängd 31 december 2018": "101 455"
+        },
+        {
+            "kommun": "Göteborg",
+            "kommunkod": "1480",
+            "folkmängd 31 december 2018": "571 868"
+        },
+        {
+            "kommun": "Götene",
+            "kommunkod": "1471",
+            "folkmängd 31 december 2018": "13 232"
+        },
+        {
+            "kommun": "Habo",
+            "kommunkod": "0643",
+            "folkmängd 31 december 2018": "12 140"
+        },
+        {
+            "kommun": "Hagfors",
+            "kommunkod": "1783",
+            "folkmängd 31 december 2018": "11 698"
+        },
+        {
+            "kommun": "Hallsberg",
+            "kommunkod": "1861",
+            "folkmängd 31 december 2018": "15 954"
+        },
+        {
+            "kommun": "Hallstahammar",
+            "kommunkod": "1961",
+            "folkmängd 31 december 2018": "16 186"
+        },
+        {
+            "kommun": "Halmstad",
+            "kommunkod": "1380",
+            "folkmängd 31 december 2018": "101 268"
+        },
+        {
+            "kommun": "Hammarö",
+            "kommunkod": "1761",
+            "folkmängd 31 december 2018": "16 483"
+        },
+        {
+            "kommun": "Haninge",
+            "kommunkod": "0136",
+            "folkmängd 31 december 2018": "89 989"
+        },
+        {
+            "kommun": "Haparanda",
+            "kommunkod": "2583",
+            "folkmängd 31 december 2018": "9 785"
+        },
+        {
+            "kommun": "Heby",
+            "kommunkod": "0331",
+            "folkmängd 31 december 2018": "13 910"
+        },
+        {
+            "kommun": "Hedemora",
+            "kommunkod": "2083",
+            "folkmängd 31 december 2018": "15 457"
+        },
+        {
+            "kommun": "Helsingborg",
+            "kommunkod": "1283",
+            "folkmängd 31 december 2018": "145 415"
+        },
+        {
+            "kommun": "Herrljunga",
+            "kommunkod": "1466",
+            "folkmängd 31 december 2018": "9 494"
+        },
+        {
+            "kommun": "Hjo",
+            "kommunkod": "1497",
+            "folkmängd 31 december 2018": "9 176"
+        },
+        {
+            "kommun": "Hofors",
+            "kommunkod": "2104",
+            "folkmängd 31 december 2018": "9 602"
+        },
+        {
+            "kommun": "Huddinge",
+            "kommunkod": "0126",
+            "folkmängd 31 december 2018": "111 722"
+        },
+        {
+            "kommun": "Hudiksvall",
+            "kommunkod": "2184",
+            "folkmängd 31 december 2018": "37 430"
+        },
+        {
+            "kommun": "Hultsfred",
+            "kommunkod": "0860",
+            "folkmängd 31 december 2018": "14 360"
+        },
+        {
+            "kommun": "Hylte",
+            "kommunkod": "1315",
+            "folkmängd 31 december 2018": "10 914"
+        },
+        {
+            "kommun": "Håbo",
+            "kommunkod": "0305",
+            "folkmängd 31 december 2018": "21 564"
+        },
+        {
+            "kommun": "Hällefors",
+            "kommunkod": "1863",
+            "folkmängd 31 december 2018": "6 983"
+        },
+        {
+            "kommun": "Härjedalen",
+            "kommunkod": "2361",
+            "folkmängd 31 december 2018": "10 147"
+        },
+        {
+            "kommun": "Härnösand",
+            "kommunkod": "2280",
+            "folkmängd 31 december 2018": "25 120"
+        },
+        {
+            "kommun": "Härryda",
+            "kommunkod": "1401",
+            "folkmängd 31 december 2018": "37 802"
+        },
+        {
+            "kommun": "Hässleholm",
+            "kommunkod": "1293",
+            "folkmängd 31 december 2018": "52 121"
+        },
+        {
+            "kommun": "Höganäs",
+            "kommunkod": "1284",
+            "folkmängd 31 december 2018": "26 566"
+        },
+        {
+            "kommun": "Högsby",
+            "kommunkod": "0821",
+            "folkmängd 31 december 2018": "6 094"
+        },
+        {
+            "kommun": "Hörby",
+            "kommunkod": "1266",
+            "folkmängd 31 december 2018": "15 635"
+        },
+        {
+            "kommun": "Höör",
+            "kommunkod": "1267",
+            "folkmängd 31 december 2018": "16 637"
+        },
+        {
+            "kommun": "Jokkmokk",
+            "kommunkod": "2510",
+            "folkmängd 31 december 2018": "5 001"
+        },
+        {
+            "kommun": "Järfälla",
+            "kommunkod": "0123",
+            "folkmängd 31 december 2018": "78 480"
+        },
+        {
+            "kommun": "Jönköping",
+            "kommunkod": "0680",
+            "folkmängd 31 december 2018": "139 222"
+        },
+        {
+            "kommun": "Kalix",
+            "kommunkod": "2514",
+            "folkmängd 31 december 2018": "16 058"
+        },
+        {
+            "kommun": "Kalmar",
+            "kommunkod": "0880",
+            "folkmängd 31 december 2018": "68 510"
+        },
+        {
+            "kommun": "Karlsborg",
+            "kommunkod": "1446",
+            "folkmängd 31 december 2018": "6 941"
+        },
+        {
+            "kommun": "Karlshamn",
+            "kommunkod": "1082",
+            "folkmängd 31 december 2018": "32 330"
+        },
+        {
+            "kommun": "Karlskoga",
+            "kommunkod": "1883",
+            "folkmängd 31 december 2018": "30 419"
+        },
+        {
+            "kommun": "Karlskrona",
+            "kommunkod": "1080",
+            "folkmängd 31 december 2018": "66 675"
+        },
+        {
+            "kommun": "Karlstad",
+            "kommunkod": "1780",
+            "folkmängd 31 december 2018": "92 497"
+        },
+        {
+            "kommun": "Katrineholm",
+            "kommunkod": "0483",
+            "folkmängd 31 december 2018": "34 550"
+        },
+        {
+            "kommun": "Kil",
+            "kommunkod": "1715",
+            "folkmängd 31 december 2018": "11 962"
+        },
+        {
+            "kommun": "Kinda",
+            "kommunkod": "0513",
+            "folkmängd 31 december 2018": "9 915"
+        },
+        {
+            "kommun": "Kiruna",
+            "kommunkod": "2584",
+            "folkmängd 31 december 2018": "22 992"
+        },
+        {
+            "kommun": "Klippan",
+            "kommunkod": "1276",
+            "folkmängd 31 december 2018": "17 600"
+        },
+        {
+            "kommun": "Knivsta",
+            "kommunkod": "0330",
+            "folkmängd 31 december 2018": "18 720"
+        },
+        {
+            "kommun": "Kramfors",
+            "kommunkod": "2282",
+            "folkmängd 31 december 2018": "18 423"
+        },
+        {
+            "kommun": "Kristianstad",
+            "kommunkod": "1290",
+            "folkmängd 31 december 2018": "84 908"
+        },
+        {
+            "kommun": "Kristinehamn",
+            "kommunkod": "1781",
+            "folkmängd 31 december 2018": "24 336"
+        },
+        {
+            "kommun": "Krokom",
+            "kommunkod": "2309",
+            "folkmängd 31 december 2018": "14 858"
+        },
+        {
+            "kommun": "Kumla",
+            "kommunkod": "1881",
+            "folkmängd 31 december 2018": "21 640"
+        },
+        {
+            "kommun": "Kungsbacka",
+            "kommunkod": "1384",
+            "folkmängd 31 december 2018": "83 348"
+        },
+        {
+            "kommun": "Kungsör",
+            "kommunkod": "1960",
+            "folkmängd 31 december 2018": "8 667"
+        },
+        {
+            "kommun": "Kungälv",
+            "kommunkod": "1482",
+            "folkmängd 31 december 2018": "45 086"
+        },
+        {
+            "kommun": "Kävlinge",
+            "kommunkod": "1261",
+            "folkmängd 31 december 2018": "31 491"
+        },
+        {
+            "kommun": "Köping",
+            "kommunkod": "1983",
+            "folkmängd 31 december 2018": "26 268"
+        },
+        {
+            "kommun": "Laholm",
+            "kommunkod": "1381",
+            "folkmängd 31 december 2018": "25 491"
+        },
+        {
+            "kommun": "Landskrona",
+            "kommunkod": "1282",
+            "folkmängd 31 december 2018": "45 775"
+        },
+        {
+            "kommun": "Laxå",
+            "kommunkod": "1860",
+            "folkmängd 31 december 2018": "5 637"
+        },
+        {
+            "kommun": "Lekeberg",
+            "kommunkod": "1814",
+            "folkmängd 31 december 2018": "8 116"
+        },
+        {
+            "kommun": "Leksand",
+            "kommunkod": "2029",
+            "folkmängd 31 december 2018": "15 804"
+        },
+        {
+            "kommun": "Lerum",
+            "kommunkod": "1441",
+            "folkmängd 31 december 2018": "42 137"
+        },
+        {
+            "kommun": "Lessebo",
+            "kommunkod": "0761",
+            "folkmängd 31 december 2018": "8 780"
+        },
+        {
+            "kommun": "Lidingö",
+            "kommunkod": "0186",
+            "folkmängd 31 december 2018": "47 818"
+        },
+        {
+            "kommun": "Lidköping",
+            "kommunkod": "1494",
+            "folkmängd 31 december 2018": "39 879"
+        },
+        {
+            "kommun": "Lilla Edet",
+            "kommunkod": "1462",
+            "folkmängd 31 december 2018": "14 046"
+        },
+        {
+            "kommun": "Lindesberg",
+            "kommunkod": "1885",
+            "folkmängd 31 december 2018": "23 575"
+        },
+        {
+            "kommun": "Linköping",
+            "kommunkod": "0580",
+            "folkmängd 31 december 2018": "161 034"
+        },
+        {
+            "kommun": "Ljungby",
+            "kommunkod": "0781",
+            "folkmängd 31 december 2018": "28 573"
+        },
+        {
+            "kommun": "Ljusdal",
+            "kommunkod": "2161",
+            "folkmängd 31 december 2018": "19 033"
+        },
+        {
+            "kommun": "Ljusnarsberg",
+            "kommunkod": "1864",
+            "folkmängd 31 december 2018": "4 846"
+        },
+        {
+            "kommun": "Lomma",
+            "kommunkod": "1262",
+            "folkmängd 31 december 2018": "24 763"
+        },
+        {
+            "kommun": "Ludvika",
+            "kommunkod": "2085",
+            "folkmängd 31 december 2018": "26 946"
+        },
+        {
+            "kommun": "Luleå",
+            "kommunkod": "2580",
+            "folkmängd 31 december 2018": "77 832"
+        },
+        {
+            "kommun": "Lund",
+            "kommunkod": "1281",
+            "folkmängd 31 december 2018": "122 948"
+        },
+        {
+            "kommun": "Lycksele",
+            "kommunkod": "2481",
+            "folkmängd 31 december 2018": "12 228"
+        },
+        {
+            "kommun": "Lysekil",
+            "kommunkod": "1484",
+            "folkmängd 31 december 2018": "14 611"
+        },
+        {
+            "kommun": "Malmö",
+            "kommunkod": "1280",
+            "folkmängd 31 december 2018": "339 313"
+        },
+        {
+            "kommun": "Malung-Sälen",
+            "kommunkod": "2023",
+            "folkmängd 31 december 2018": "10 106"
+        },
+        {
+            "kommun": "Malå",
+            "kommunkod": "2418",
+            "folkmängd 31 december 2018": "3 122"
+        },
+        {
+            "kommun": "Mariestad",
+            "kommunkod": "1493",
+            "folkmängd 31 december 2018": "24 372"
+        },
+        {
+            "kommun": "Mark",
+            "kommunkod": "1463",
+            "folkmängd 31 december 2018": "34 781"
+        },
+        {
+            "kommun": "Markaryd",
+            "kommunkod": "0767",
+            "folkmängd 31 december 2018": "10 260"
+        },
+        {
+            "kommun": "Mellerud",
+            "kommunkod": "1461",
+            "folkmängd 31 december 2018": "9 354"
+        },
+        {
+            "kommun": "Mjölby",
+            "kommunkod": "0586",
+            "folkmängd 31 december 2018": "27 373"
+        },
+        {
+            "kommun": "Mora",
+            "kommunkod": "2062",
+            "folkmängd 31 december 2018": "20 390"
+        },
+        {
+            "kommun": "Motala",
+            "kommunkod": "0583",
+            "folkmängd 31 december 2018": "43 687"
+        },
+        {
+            "kommun": "Mullsjö",
+            "kommunkod": "0642",
+            "folkmängd 31 december 2018": "7 324"
+        },
+        {
+            "kommun": "Munkedal",
+            "kommunkod": "1430",
+            "folkmängd 31 december 2018": "10 503"
+        },
+        {
+            "kommun": "Munkfors",
+            "kommunkod": "1762",
+            "folkmängd 31 december 2018": "3 789"
+        },
+        {
+            "kommun": "Mölndal",
+            "kommunkod": "1481",
+            "folkmängd 31 december 2018": "68 152"
+        },
+        {
+            "kommun": "Mönsterås",
+            "kommunkod": "0861",
+            "folkmängd 31 december 2018": "13 565"
+        },
+        {
+            "kommun": "Mörbylånga",
+            "kommunkod": "0840",
+            "folkmängd 31 december 2018": "15 048"
+        },
+        {
+            "kommun": "Nacka",
+            "kommunkod": "0182",
+            "folkmängd 31 december 2018": "103 656"
+        },
+        {
+            "kommun": "Nora",
+            "kommunkod": "1884",
+            "folkmängd 31 december 2018": "10 737"
+        },
+        {
+            "kommun": "Norberg",
+            "kommunkod": "1962",
+            "folkmängd 31 december 2018": "5 795"
+        },
+        {
+            "kommun": "Nordanstig",
+            "kommunkod": "2132",
+            "folkmängd 31 december 2018": "9 517"
+        },
+        {
+            "kommun": "Nordmaling",
+            "kommunkod": "2401",
+            "folkmängd 31 december 2018": "7 118"
+        },
+        {
+            "kommun": "Norrköping",
+            "kommunkod": "0581",
+            "folkmängd 31 december 2018": "141 676"
+        },
+        {
+            "kommun": "Norrtälje",
+            "kommunkod": "0188",
+            "folkmängd 31 december 2018": "61 769"
+        },
+        {
+            "kommun": "Norsjö",
+            "kommunkod": "2417",
+            "folkmängd 31 december 2018": "4 094"
+        },
+        {
+            "kommun": "Nybro",
+            "kommunkod": "0881",
+            "folkmängd 31 december 2018": "20 350"
+        },
+        {
+            "kommun": "Nykvarn",
+            "kommunkod": "0140",
+            "folkmängd 31 december 2018": "10 923"
+        },
+        {
+            "kommun": "Nyköping",
+            "kommunkod": "0480",
+            "folkmängd 31 december 2018": "56 011"
+        },
+        {
+            "kommun": "Nynäshamn",
+            "kommunkod": "0192",
+            "folkmängd 31 december 2018": "28 290"
+        },
+        {
+            "kommun": "Nässjö",
+            "kommunkod": "0682",
+            "folkmängd 31 december 2018": "31 477"
+        },
+        {
+            "kommun": "Ockelbo",
+            "kommunkod": "2101",
+            "folkmängd 31 december 2018": "5 906"
+        },
+        {
+            "kommun": "Olofström",
+            "kommunkod": "1060",
+            "folkmängd 31 december 2018": "13 516"
+        },
+        {
+            "kommun": "Orsa",
+            "kommunkod": "2034",
+            "folkmängd 31 december 2018": "6 892"
+        },
+        {
+            "kommun": "Orust",
+            "kommunkod": "1421",
+            "folkmängd 31 december 2018": "15 110"
+        },
+        {
+            "kommun": "Osby",
+            "kommunkod": "1273",
+            "folkmängd 31 december 2018": "13 267"
+        },
+        {
+            "kommun": "Oskarshamn",
+            "kommunkod": "0882",
+            "folkmängd 31 december 2018": "26 928"
+        },
+        {
+            "kommun": "Ovanåker",
+            "kommunkod": "2121",
+            "folkmängd 31 december 2018": "11 684"
+        },
+        {
+            "kommun": "Oxelösund",
+            "kommunkod": "0481",
+            "folkmängd 31 december 2018": "12 062"
+        },
+        {
+            "kommun": "Pajala",
+            "kommunkod": "2521",
+            "folkmängd 31 december 2018": "6 039"
+        },
+        {
+            "kommun": "Partille",
+            "kommunkod": "1402",
+            "folkmängd 31 december 2018": "38 443"
+        },
+        {
+            "kommun": "Perstorp",
+            "kommunkod": "1275",
+            "folkmängd 31 december 2018": "7 479"
+        },
+        {
+            "kommun": "Piteå",
+            "kommunkod": "2581",
+            "folkmängd 31 december 2018": "42 116"
+        },
+        {
+            "kommun": "Ragunda",
+            "kommunkod": "2303",
+            "folkmängd 31 december 2018": "5 343"
+        },
+        {
+            "kommun": "Robertsfors",
+            "kommunkod": "2409",
+            "folkmängd 31 december 2018": "6 762"
+        },
+        {
+            "kommun": "Ronneby",
+            "kommunkod": "1081",
+            "folkmängd 31 december 2018": "29 695"
+        },
+        {
+            "kommun": "Rättvik",
+            "kommunkod": "2031",
+            "folkmängd 31 december 2018": "10 907"
+        },
+        {
+            "kommun": "Sala",
+            "kommunkod": "1981",
+            "folkmängd 31 december 2018": "22 816"
+        },
+        {
+            "kommun": "Salem",
+            "kommunkod": "0128",
+            "folkmängd 31 december 2018": "16 786"
+        },
+        {
+            "kommun": "Sandviken",
+            "kommunkod": "2181",
+            "folkmängd 31 december 2018": "39 208"
+        },
+        {
+            "kommun": "Sigtuna",
+            "kommunkod": "0191",
+            "folkmängd 31 december 2018": "48 130"
+        },
+        {
+            "kommun": "Simrishamn",
+            "kommunkod": "1291",
+            "folkmängd 31 december 2018": "19 278"
+        },
+        {
+            "kommun": "Sjöbo",
+            "kommunkod": "1265",
+            "folkmängd 31 december 2018": "19 153"
+        },
+        {
+            "kommun": "Skara",
+            "kommunkod": "1495",
+            "folkmängd 31 december 2018": "18 829"
+        },
+        {
+            "kommun": "Skellefteå",
+            "kommunkod": "2482",
+            "folkmängd 31 december 2018": "72 467"
+        },
+        {
+            "kommun": "Skinnskatteberg",
+            "kommunkod": "1904",
+            "folkmängd 31 december 2018": "4 429"
+        },
+        {
+            "kommun": "Skurup",
+            "kommunkod": "1264",
+            "folkmängd 31 december 2018": "15 759"
+        },
+        {
+            "kommun": "Skövde",
+            "kommunkod": "1496",
+            "folkmängd 31 december 2018": "55 729"
+        },
+        {
+            "kommun": "Smedjebacken",
+            "kommunkod": "2061",
+            "folkmängd 31 december 2018": "10 897"
+        },
+        {
+            "kommun": "Sollefteå",
+            "kommunkod": "2283",
+            "folkmängd 31 december 2018": "19 500"
+        },
+        {
+            "kommun": "Sollentuna",
+            "kommunkod": "0163",
+            "folkmängd 31 december 2018": "72 528"
+        },
+        {
+            "kommun": "Solna",
+            "kommunkod": "0184",
+            "folkmängd 31 december 2018": "80 950"
+        },
+        {
+            "kommun": "Sorsele",
+            "kommunkod": "2422",
+            "folkmängd 31 december 2018": "2 522"
+        },
+        {
+            "kommun": "Sotenäs",
+            "kommunkod": "1427",
+            "folkmängd 31 december 2018": "9 030"
+        },
+        {
+            "kommun": "Staffanstorp",
+            "kommunkod": "1230",
+            "folkmängd 31 december 2018": "24 724"
+        },
+        {
+            "kommun": "Stenungsund",
+            "kommunkod": "1415",
+            "folkmängd 31 december 2018": "26 503"
+        },
+        {
+            "kommun": "Stockholm",
+            "kommunkod": "0180",
+            "folkmängd 31 december 2018": "962 154"
+        },
+        {
+            "kommun": "Storfors",
+            "kommunkod": "1760",
+            "folkmängd 31 december 2018": "4 055"
+        },
+        {
+            "kommun": "Storuman",
+            "kommunkod": "2421",
+            "folkmängd 31 december 2018": "5 912"
+        },
+        {
+            "kommun": "Strängnäs",
+            "kommunkod": "0486",
+            "folkmängd 31 december 2018": "35 761"
+        },
+        {
+            "kommun": "Strömstad",
+            "kommunkod": "1486",
+            "folkmängd 31 december 2018": "13 253"
+        },
+        {
+            "kommun": "Strömsund",
+            "kommunkod": "2313",
+            "folkmängd 31 december 2018": "11 703"
+        },
+        {
+            "kommun": "Sundbyberg",
+            "kommunkod": "0183",
+            "folkmängd 31 december 2018": "50 564"
+        },
+        {
+            "kommun": "Sundsvall",
+            "kommunkod": "2281",
+            "folkmängd 31 december 2018": "98 850"
+        },
+        {
+            "kommun": "Sunne",
+            "kommunkod": "1766",
+            "folkmängd 31 december 2018": "13 261"
+        },
+        {
+            "kommun": "Surahammar",
+            "kommunkod": "1907",
+            "folkmängd 31 december 2018": "10 088"
+        },
+        {
+            "kommun": "Svalöv",
+            "kommunkod": "1214",
+            "folkmängd 31 december 2018": "14 123"
+        },
+        {
+            "kommun": "Svedala",
+            "kommunkod": "1263",
+            "folkmängd 31 december 2018": "21 576"
+        },
+        {
+            "kommun": "Svenljunga",
+            "kommunkod": "1465",
+            "folkmängd 31 december 2018": "10 683"
+        },
+        {
+            "kommun": "Säffle",
+            "kommunkod": "1785",
+            "folkmängd 31 december 2018": "15 643"
+        },
+        {
+            "kommun": "Säter",
+            "kommunkod": "2082",
+            "folkmängd 31 december 2018": "11 123"
+        },
+        {
+            "kommun": "Sävsjö",
+            "kommunkod": "0684",
+            "folkmängd 31 december 2018": "11 631"
+        },
+        {
+            "kommun": "Söderhamn",
+            "kommunkod": "2182",
+            "folkmängd 31 december 2018": "25 721"
+        },
+        {
+            "kommun": "Söderköping",
+            "kommunkod": "0582",
+            "folkmängd 31 december 2018": "14 618"
+        },
+        {
+            "kommun": "Södertälje",
+            "kommunkod": "0181",
+            "folkmängd 31 december 2018": "97 381"
+        },
+        {
+            "kommun": "Sölvesborg",
+            "kommunkod": "1083",
+            "folkmängd 31 december 2018": "17 468"
+        },
+        {
+            "kommun": "Tanum",
+            "kommunkod": "1435",
+            "folkmängd 31 december 2018": "12 873"
+        },
+        {
+            "kommun": "Tibro",
+            "kommunkod": "1472",
+            "folkmängd 31 december 2018": "11 168"
+        },
+        {
+            "kommun": "Tidaholm",
+            "kommunkod": "1498",
+            "folkmängd 31 december 2018": "12 828"
+        },
+        {
+            "kommun": "Tierp",
+            "kommunkod": "0360",
+            "folkmängd 31 december 2018": "21 127"
+        },
+        {
+            "kommun": "Timrå",
+            "kommunkod": "2262",
+            "folkmängd 31 december 2018": "18 060"
+        },
+        {
+            "kommun": "Tingsryd",
+            "kommunkod": "0763",
+            "folkmängd 31 december 2018": "12 407"
+        },
+        {
+            "kommun": "Tjörn",
+            "kommunkod": "1419",
+            "folkmängd 31 december 2018": "15 922"
+        },
+        {
+            "kommun": "Tomelilla",
+            "kommunkod": "1270",
+            "folkmängd 31 december 2018": "13 557"
+        },
+        {
+            "kommun": "Torsby",
+            "kommunkod": "1737",
+            "folkmängd 31 december 2018": "11 719"
+        },
+        {
+            "kommun": "Torsås",
+            "kommunkod": "0834",
+            "folkmängd 31 december 2018": "7 098"
+        },
+        {
+            "kommun": "Tranemo",
+            "kommunkod": "1452",
+            "folkmängd 31 december 2018": "11 874"
+        },
+        {
+            "kommun": "Tranås",
+            "kommunkod": "0687",
+            "folkmängd 31 december 2018": "18 987"
+        },
+        {
+            "kommun": "Trelleborg",
+            "kommunkod": "1287",
+            "folkmängd 31 december 2018": "44 902"
+        },
+        {
+            "kommun": "Trollhättan",
+            "kommunkod": "1488",
+            "folkmängd 31 december 2018": "58 728"
+        },
+        {
+            "kommun": "Trosa",
+            "kommunkod": "0488",
+            "folkmängd 31 december 2018": "13 309"
+        },
+        {
+            "kommun": "Tyresö",
+            "kommunkod": "0138",
+            "folkmängd 31 december 2018": "48 004"
+        },
+        {
+            "kommun": "Täby",
+            "kommunkod": "0160",
+            "folkmängd 31 december 2018": "71 397"
+        },
+        {
+            "kommun": "Töreboda",
+            "kommunkod": "1473",
+            "folkmängd 31 december 2018": "9 312"
+        },
+        {
+            "kommun": "Uddevalla",
+            "kommunkod": "1485",
+            "folkmängd 31 december 2018": "56 259"
+        },
+        {
+            "kommun": "Ulricehamn",
+            "kommunkod": "1491",
+            "folkmängd 31 december 2018": "24 445"
+        },
+        {
+            "kommun": "Umeå",
+            "kommunkod": "2480",
+            "folkmängd 31 december 2018": "127 119"
+        },
+        {
+            "kommun": "Upplands Väsby",
+            "kommunkod": "0114",
+            "folkmängd 31 december 2018": "45 543"
+        },
+        {
+            "kommun": "Upplands-Bro",
+            "kommunkod": "0139",
+            "folkmängd 31 december 2018": "28 756"
+        },
+        {
+            "kommun": "Uppsala",
+            "kommunkod": "0380",
+            "folkmängd 31 december 2018": "225 164"
+        },
+        {
+            "kommun": "Uppvidinge",
+            "kommunkod": "0760",
+            "folkmängd 31 december 2018": "9 581"
+        },
+        {
+            "kommun": "Vadstena",
+            "kommunkod": "0584",
+            "folkmängd 31 december 2018": "7 514"
+        },
+        {
+            "kommun": "Vaggeryd",
+            "kommunkod": "0665",
+            "folkmängd 31 december 2018": "13 980"
+        },
+        {
+            "kommun": "Valdemarsvik",
+            "kommunkod": "0563",
+            "folkmängd 31 december 2018": "7 956"
+        },
+        {
+            "kommun": "Vallentuna",
+            "kommunkod": "0115",
+            "folkmängd 31 december 2018": "33 432"
+        },
+        {
+            "kommun": "Vansbro",
+            "kommunkod": "2021",
+            "folkmängd 31 december 2018": "6 807"
+        },
+        {
+            "kommun": "Vara",
+            "kommunkod": "1470",
+            "folkmängd 31 december 2018": "15 952"
+        },
+        {
+            "kommun": "Varberg",
+            "kommunkod": "1383",
+            "folkmängd 31 december 2018": "63 630"
+        },
+        {
+            "kommun": "Vaxholm",
+            "kommunkod": "0187",
+            "folkmängd 31 december 2018": "12 023"
+        },
+        {
+            "kommun": "Vellinge",
+            "kommunkod": "1233",
+            "folkmängd 31 december 2018": "36 499"
+        },
+        {
+            "kommun": "Vetlanda",
+            "kommunkod": "0685",
+            "folkmängd 31 december 2018": "27 504"
+        },
+        {
+            "kommun": "Vilhelmina",
+            "kommunkod": "2462",
+            "folkmängd 31 december 2018": "6 752"
+        },
+        {
+            "kommun": "Vimmerby",
+            "kommunkod": "0884",
+            "folkmängd 31 december 2018": "15 764"
+        },
+        {
+            "kommun": "Vindeln",
+            "kommunkod": "2404",
+            "folkmängd 31 december 2018": "5 436"
+        },
+        {
+            "kommun": "Vingåker",
+            "kommunkod": "0428",
+            "folkmängd 31 december 2018": "9 136"
+        },
+        {
+            "kommun": "Vårgårda",
+            "kommunkod": "1442",
+            "folkmängd 31 december 2018": "11 658"
+        },
+        {
+            "kommun": "Vänersborg",
+            "kommunkod": "1487",
+            "folkmängd 31 december 2018": "39 411"
+        },
+        {
+            "kommun": "Vännäs",
+            "kommunkod": "2460",
+            "folkmängd 31 december 2018": "8 785"
+        },
+        {
+            "kommun": "Värmdö",
+            "kommunkod": "0120",
+            "folkmängd 31 december 2018": "44 397"
+        },
+        {
+            "kommun": "Värnamo",
+            "kommunkod": "0683",
+            "folkmängd 31 december 2018": "34 428"
+        },
+        {
+            "kommun": "Västervik",
+            "kommunkod": "0883",
+            "folkmängd 31 december 2018": "36 680"
+        },
+        {
+            "kommun": "Västerås",
+            "kommunkod": "1980",
+            "folkmängd 31 december 2018": "152 078"
+        },
+        {
+            "kommun": "Växjö",
+            "kommunkod": "0780",
+            "folkmängd 31 december 2018": "92 567"
+        },
+        {
+            "kommun": "Ydre",
+            "kommunkod": "0512",
+            "folkmängd 31 december 2018": "3 743"
+        },
+        {
+            "kommun": "Ystad",
+            "kommunkod": "1286",
+            "folkmängd 31 december 2018": "30 226"
+        },
+        {
+            "kommun": "Åmål",
+            "kommunkod": "1492",
+            "folkmängd 31 december 2018": "12 720"
+        },
+        {
+            "kommun": "Ånge",
+            "kommunkod": "2260",
+            "folkmängd 31 december 2018": "9 411"
+        },
+        {
+            "kommun": "Åre",
+            "kommunkod": "2321",
+            "folkmängd 31 december 2018": "11 529"
+        },
+        {
+            "kommun": "Årjäng",
+            "kommunkod": "1765",
+            "folkmängd 31 december 2018": "10 011"
+        },
+        {
+            "kommun": "Åsele",
+            "kommunkod": "2463",
+            "folkmängd 31 december 2018": "2 819"
+        },
+        {
+            "kommun": "Åstorp",
+            "kommunkod": "1277",
+            "folkmängd 31 december 2018": "15 987"
+        },
+        {
+            "kommun": "Åtvidaberg",
+            "kommunkod": "0561",
+            "folkmängd 31 december 2018": "11 537"
+        },
+        {
+            "kommun": "Älmhult",
+            "kommunkod": "0765",
+            "folkmängd 31 december 2018": "17 568"
+        },
+        {
+            "kommun": "Älvdalen",
+            "kommunkod": "2039",
+            "folkmängd 31 december 2018": "7 121"
+        },
+        {
+            "kommun": "Älvkarleby",
+            "kommunkod": "0319",
+            "folkmängd 31 december 2018": "9 392"
+        },
+        {
+            "kommun": "Älvsbyn",
+            "kommunkod": "2560",
+            "folkmängd 31 december 2018": "8 140"
+        },
+        {
+            "kommun": "Ängelholm",
+            "kommunkod": "1292",
+            "folkmängd 31 december 2018": "42 131"
+        },
+        {
+            "kommun": "Öckerö",
+            "kommunkod": "1407",
+            "folkmängd 31 december 2018": "12 945"
+        },
+        {
+            "kommun": "Ödeshög",
+            "kommunkod": "0509",
+            "folkmängd 31 december 2018": "5 323"
+        },
+        {
+            "kommun": "Örebro",
+            "kommunkod": "1880",
+            "folkmängd 31 december 2018": "153 367"
+        },
+        {
+            "kommun": "Örkelljunga",
+            "kommunkod": "1257",
+            "folkmängd 31 december 2018": "10 174"
+        },
+        {
+            "kommun": "Örnsköldsvik",
+            "kommunkod": "2284",
+            "folkmängd 31 december 2018": "56 089"
+        },
+        {
+            "kommun": "Östersund",
+            "kommunkod": "2380",
+            "folkmängd 31 december 2018": "63 227"
+        },
+        {
+            "kommun": "Österåker",
+            "kommunkod": "0117",
+            "folkmängd 31 december 2018": "44 831"
+        },
+        {
+            "kommun": "Östhammar",
+            "kommunkod": "0382",
+            "folkmängd 31 december 2018": "22 048"
+        },
+        {
+            "kommun": "Östra Göinge",
+            "kommunkod": "1256",
+            "folkmängd 31 december 2018": "14 915"
+        },
+        {
+            "kommun": "Överkalix",
+            "kommunkod": "2513",
+            "folkmängd 31 december 2018": "3 302"
+        },
+        {
+            "kommun": "Övertorneå",
+            "kommunkod": "2518",
+            "folkmängd 31 december 2018": "4 410"
+        }
+    ]

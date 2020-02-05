@@ -5,17 +5,7 @@
 'use strict'
 const express = require('express')
 const router = express.Router()
-const bcrypt = require('bcryptjs')
-const passwordValidator = require('password-validator')
-const logger = require('../config/logger')
 const Publisher = require('../models/Publisher')
-
-const passwordSchema = new passwordValidator()
-passwordSchema.is().min(8)
-passwordSchema.is().max(100)
-passwordSchema.has().uppercase()
-passwordSchema.has().lowercase()
-passwordSchema.has().digits()
 
 const DUMMY = { message: 'ok' }
 
@@ -71,20 +61,8 @@ router.get('/:id/details', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const { name, email, password } = req.body
-    if (!name || !email || !password) {
-      return res.status(422).json({
-        msg: 'Missing one or several required fields',
-      })
-    }
-    if (!passwordSchema.validate(password)) {
-      return res.status(422).json({
-        msg:
-          'Password must be at least 8 chars, max 100 chars, one lowercase, one uppercase, one digit.',
-      })
-    }
     let publisher = new Publisher({ name, email, password })
     publisher = await publisher.save()
-
     return res.status(201).json({
       msg: 'Successfully created new publisher',
       fields: {
