@@ -7,6 +7,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const passwordValidator = require('password-validator')
+const logger = require('../config/logger')
 const Publisher = require('../models/Publisher')
 
 const passwordSchema = new passwordValidator()
@@ -30,7 +31,7 @@ router.get('/', async (req, res, next) => {
     } else {
       console.log('STRING or undefined', area)
     }
-    const publishers = await Publisher.findAll()
+    const publishers = await Publisher.find()
     return res.json({ items: publishers })
   } catch (e) {
     next(e)
@@ -42,11 +43,9 @@ router.get('/', async (req, res, next) => {
 // @access  Public
 router.get('/:id', async (req, res, next) => {
   try {
-    const publisher = await Publisher.findByPk(req.params.id, {
-      attributes: ['id', 'name'],
-    })
+    const publisher = await Publisher.findById(req.params.id, '_id name')
     if (!publisher) {
-      return res.status(404)
+      next()
     }
     return res.json(publisher)
   } catch (e) {
@@ -83,23 +82,18 @@ router.post('/', async (req, res, next) => {
           'Password must be at least 8 chars, max 100 chars, one lowercase, one uppercase, one digit.',
       })
     }
-    const passwordHash = await bcrypt.hash(password, 12)
+    let publisher = new Publisher({ name, email, password })
+    publisher = await publisher.save()
 
-    const publisher = await Publisher.create({
-      name,
-      email,
-      password: passwordHash,
-    })
-    return res.json({
+    return res.status(201).json({
       msg: 'Successfully created new publisher',
       fields: {
-        id: publisher.id,
+        _id: publisher._id,
         name: publisher.name,
         email: publisher.email,
       },
     })
   } catch (e) {
-    console.log('STATUSCODE!', e.statusCode)
     next(e)
   }
 })

@@ -1,29 +1,26 @@
-const Sequelize = require('sequelize')
-const db = require('../config/db')
+'use strict'
+const mongoose = require('mongoose')
+const shortid = require('shortid')
+const bcrypt = require('bcryptjs')
 
-const Publisher = db.define('publisher', {
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      len: {
-        args: [1, 255],
-        msg: 'Name must be between 1 and 255 characters',
-      },
+const schema = new mongoose.Schema(
+  {
+    _id: {
+      type: String,
+      default: shortid.generate,
     },
+    name: String,
+    email: String,
+    password: String,
   },
-  email: {
-    type: Sequelize.STRING,
-    unique: { msg: 'Email must be unique' },
-    allowNull: false,
-    validate: {
-      isEmail: { msg: 'Incorrect email format' },
-    },
-  },
-  password: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
+  { timestamps: true }
+)
+
+schema.pre('save', async function() {
+  const passwordHash = await bcrypt.hash(this.password, 12)
+  this.password = passwordHash
 })
+
+const Publisher = mongoose.model('Publisher', schema)
 
 module.exports = Publisher

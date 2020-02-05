@@ -1,16 +1,18 @@
 'use strict'
+require('dotenv').config()
 const express = require('express')
 const compression = require('compression')
 const cors = require('cors')
 const morgan = require('morgan')
-const Sequelize = require('sequelize')
 const db = require('./config/db')
+const logger = require('./config/logger')
 const app = express()
 
-// Test DB
-db.authenticate()
-  .then(() => console.log('Database connected...'))
-  .catch(err => console.log('Error: ' + err))
+// connect to the database
+db.connect().catch(error => {
+  logger.error(error)
+  process.exit(1)
+})
 
 // Middle-ware
 if (process.env.NODE_ENV !== 'production') {
@@ -37,10 +39,8 @@ app.use((err, req, res, _) => {
   if (err.statusCode) {
     return res.status(err.statusCode).json({ msg: err.message })
   }
-  if (err instanceof Sequelize.ValidationError) {
-    return res.status(422).json({ msg: err.message })
-  }
-  console.error(err)
+  //TODO: add checking for validation errors & send appropriate response.
+  logger.error(err)
   res.status(500).json({
     msg: err.clientMsg || 'Något gick fel...',
   })
@@ -53,4 +53,4 @@ app.use((req, res) => {
 
 const port = process.env.PORT || 5000
 
-app.listen(port, () => console.log(`API Server started on port ${port}`))
+app.listen(port, () => logger.info(`API Server started on port ${port}`))
