@@ -7,7 +7,7 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const db = require('./config/db')
 const logger = require('./config/logger')
-const validationError = require('./config/constants').VALIDATION_ERROR
+const { VALIDATION_ERROR } = require('./config/constants')
 const app = express()
 
 // connect to the database
@@ -43,7 +43,7 @@ app.use((err, req, res, _) => {
   }
   if (
     err instanceof mongoose.Error.ValidationError ||
-    err.name === validationError
+    err.name === VALIDATION_ERROR
   ) {
     res.status(422).json({ msg: err.message })
   }

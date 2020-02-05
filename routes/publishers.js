@@ -14,14 +14,17 @@ const DUMMY = { message: 'ok' }
 // @access  Public
 router.get('/', async (req, res, next) => {
   try {
-    const area = req.query.area
-    console.log(typeof area)
-    if (typeof area === 'object' && area.length) {
-      console.log('ARRAY!', area)
-    } else {
-      console.log('STRING or undefined', area)
+    const match = {}
+    if (req.query.area) {
+      match.area = { $in: req.query.area }
     }
-    const publishers = await Publisher.find()
+    if (req.query.publisher) {
+      match._id = { $in: req.query.publisher }
+    }
+    const publishers = await Publisher.find({ ...match }, 'name').populate(
+      'area',
+      'name population'
+    )
     return res.json({ items: publishers })
   } catch (e) {
     next(e)
@@ -60,16 +63,13 @@ router.get('/:id/details', async (req, res, next) => {
 // @access  Private
 router.post('/', async (req, res, next) => {
   try {
-    const { name, email, password } = req.body
-    let publisher = new Publisher({ name, email, password })
+    const { name, area, email, password } = req.body
+    let publisher = new Publisher({ name, area, email, password })
     publisher = await publisher.save()
     return res.status(201).json({
-      msg: 'Successfully created new publisher',
-      fields: {
-        _id: publisher._id,
-        name: publisher.name,
-        email: publisher.email,
-      },
+      _id: publisher._id,
+      name: publisher.name,
+      email: publisher.email,
     })
   } catch (e) {
     next(e)
@@ -81,8 +81,11 @@ router.post('/', async (req, res, next) => {
 // @access  Private
 router.delete('/:id', async (req, res, next) => {
   try {
-    console.log('DELETE ID', req.params.id)
-    return res.json(DUMMY)
+    const doc = await Publisher.findByIdAndDelete(req.params.id)
+    if (!doc) {
+      return next()
+    }
+    return res.status(204).send()
   } catch (e) {
     next(e)
   }
@@ -93,8 +96,22 @@ router.delete('/:id', async (req, res, next) => {
 // @access  Private
 router.patch('/:id', async (req, res, next) => {
   try {
-    console.log('PATCH ID', req.params.id)
-    return res.json(DUMMY)
+    const { name, area, email, password } = req.body
+    let publisher = await Publisher.findById(req.params.id)
+    if (!publisher) {
+      return next()
+    }
+    publisher.name = name || publisher.name
+    publisher.area = area || publisher.area
+    publisher.email = email || publisher.email
+    publisher.password = password || publisher.password
+    publisher = await publisher.save()
+    return res.json({
+      _id: publisher._id,
+      name: publisher.name,
+      email: publisher.email,
+      area: publisher.area,
+    })
   } catch (e) {
     next(e)
   }
