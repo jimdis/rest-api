@@ -5,9 +5,11 @@
 'use strict'
 const express = require('express')
 const router = express.Router()
+const bcrypt = require('bcryptjs')
+const auth = require('../middleware/auth')
 const Publisher = require('../models/Publisher')
-
-const DUMMY = { message: 'ok' }
+const ValidationError = require('../errors/ValidationError')
+const jwt = require('../lib/jwt')
 
 // @route   GET /publishers
 // @desc    Get all publishers, possibly filtered with query string param area
@@ -46,21 +48,9 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-// @route   GET /publishers/:id/details
-// @desc    Get private publisher details based on ID
-// @access  Private
-router.get('/:id/details', async (req, res, next) => {
-  try {
-    console.log('ID!', req.params.id)
-    return res.json(DUMMY)
-  } catch (e) {
-    next(e)
-  }
-})
-
 // @route   POST /publishers
 // @desc    Post new publisher
-// @access  Private
+// @access  Public
 router.post('/', async (req, res, next) => {
   try {
     const { name, area, email, password } = req.body
@@ -76,12 +66,61 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+// @route   POST /publishers/login
+// @desc    Post login credentials
+// @access  Public
+router.post('/login', async (req, res, next) => {
+  try {
+    const { email, password } = req.body
+    if (!email || !password) {
+      next(new ValidationError('email and password fields must be provided'))
+    }
+    const publisher = await Publisher.findOne({ email })
+    console.log(publisher)
+    const passwordMatch =
+      publisher && (await bcrypt.compare(password, publisher.password))
+    if (!passwordMatch) {
+      return res
+        .status(403)
+        .json({ msg: 'Email/password combination is incorrect' })
+    }
+    const token = await jwt.signToken(
+      { id: publisher.id },
+      process.env.JWT_SECRET,
+      { expiresIn: 3600 }
+    )
+    return res.json({
+      token,
+    })
+  } catch (e) {
+    next(e)
+  }
+})
+
+// @route   GET /publishers/:id/details
+// @desc    Get Protected publisher details based on ID
+// @access  Protected
+router.get('/:id/details', auth, async (req, res, next) => {
+  try {
+    const publisher = await Publisher.findById(
+      req.token.id,
+      '-password -__v'
+    ).populate('area', 'name population')
+    if (!publisher) {
+      next()
+    }
+    return res.json(publisher)
+  } catch (e) {
+    next(e)
+  }
+})
+
 // @route   DELETE /publisher/:id
 // @desc    Deletes publisher with id
-// @access  Private
-router.delete('/:id', async (req, res, next) => {
+// @access  Protected
+router.delete('/:id', auth, async (req, res, next) => {
   try {
-    const doc = await Publisher.findByIdAndDelete(req.params.id)
+    const doc = await Publisher.findByIdAndDelete(req.token.id)
     if (!doc) {
       return next()
     }
@@ -93,11 +132,11 @@ router.delete('/:id', async (req, res, next) => {
 
 // @route   PATCH /publishers/:id
 // @desc    Patches publishers with id
-// @access  Private
-router.patch('/:id', async (req, res, next) => {
+// @access  Protected
+router.patch('/:id', auth, async (req, res, next) => {
   try {
     const { name, area, email, password } = req.body
-    let publisher = await Publisher.findById(req.params.id)
+    let publisher = await Publisher.findById(req.token.id)
     if (!publisher) {
       return next()
     }
