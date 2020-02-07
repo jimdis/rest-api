@@ -59,11 +59,15 @@ router.post('/', async (req, res, next) => {
     const { name, area, email, password } = req.body
     let publisher = new Publisher({ name, area, email, password })
     publisher = await publisher.save()
-    return res.status(201).json({
-      _id: publisher._id,
-      name: publisher.name,
-      email: publisher.email,
-    })
+    const url = req.protocol + '://' + req.get('host') + req.originalUrl
+    return res
+      .status(201)
+      .header('Location', `${url}/${publisher._id}`)
+      .json({
+        _id: publisher._id,
+        name: publisher.name,
+        email: publisher.email,
+      })
   } catch (e) {
     next(e)
   }
@@ -78,6 +82,7 @@ router.post('/login', async (req, res, next) => {
     if (!email || !password) {
       next(new ValidationError('email and password fields must be provided'))
     }
+    console.log(email, password)
     const publisher = await Publisher.findOne({ email })
     console.log(publisher)
     const passwordMatch =
@@ -85,7 +90,12 @@ router.post('/login', async (req, res, next) => {
     if (!passwordMatch) {
       return res
         .status(403)
-        .json({ msg: 'Email/password combination is incorrect' })
+        .json({
+          error: {
+            code: 403,
+            messsage: 'Email/password combination is incorrect',
+          },
+        })
     }
     const token = await jwt.signToken(
       { id: publisher.id },
@@ -96,9 +106,9 @@ router.post('/login', async (req, res, next) => {
       .header('Cache-Control', 'no-store')
       .header('Pragma', 'no-cache')
       .json({
-        access_token: token,
-        token_type: 'bearer',
-        expires_in: 3600,
+        accessToken: token,
+        tokenType: 'bearer',
+        expiresIn: 3600,
       })
   } catch (e) {
     next(e)
@@ -138,20 +148,20 @@ router.delete('/:id', auth, async (req, res, next) => {
   }
 })
 
-// @route   PATCH /publishers/:id
-// @desc    Patches publishers with id
+// @route   PUT /publishers/:id
+// @desc    Put publisher with id
 // @access  Protected
-router.patch('/:id', auth, async (req, res, next) => {
+router.put('/:id', auth, async (req, res, next) => {
   try {
     const { name, area, email, password } = req.body
     let publisher = await Publisher.findById(req.token.id)
     if (!publisher) {
       return next()
     }
-    publisher.name = name || publisher.name
-    publisher.area = area || publisher.area
-    publisher.email = email || publisher.email
-    publisher.password = password || publisher.password
+    publisher.name = name
+    publisher.area = area
+    publisher.email = email
+    publisher.password = password
     publisher = await publisher.save()
     return res.json({
       _id: publisher._id,

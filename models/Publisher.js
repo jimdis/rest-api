@@ -4,7 +4,7 @@ const shortid = require('shortid')
 const bcrypt = require('bcryptjs')
 const validator = require('validator').default
 const passwordValidator = require('password-validator')
-const { VALIDATION_ERROR } = require('../config/constants')
+const ValidationError = require('../errors/ValidationError')
 const Area = require('./Area')
 
 const passwordSchema = new passwordValidator()
@@ -56,14 +56,14 @@ const schema = new mongoose.Schema(
 
 // Password hashing middleware
 schema.pre('save', async function(next) {
+  console.log(this.password)
   const passwordHash = await bcrypt.hash(this.password, 12)
+  console.log(passwordHash)
   this.password = passwordHash
   this.name = validator.escape(this.name)
   const area = await Area.findById(this.area)
   if (!area) {
-    const customError = new Error(`Invalid area ${this.area}`)
-    customError.name = VALIDATION_ERROR
-    next(customError)
+    next(new ValidationError(`Invalid area ${this.area}`))
   }
 })
 
@@ -72,9 +72,7 @@ schema.post('save', function(error, doc, next) {
   if (error.name === 'MongoError' && error.code === 11000) {
     const key = Object.keys(error.keyValue)[0]
     const value = error.keyValue[key]
-    const customError = new Error(`${key} ${value} is already in use`)
-    customError.name = VALIDATION_ERROR
-    next(customError)
+    next(new ValidationError(`${key} ${value} is already in use`))
   } else {
     next()
   }

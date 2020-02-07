@@ -7,7 +7,6 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const db = require('./config/db')
 const logger = require('./config/logger')
-const { VALIDATION_ERROR } = require('./config/constants')
 const ValidationError = require('./errors/ValidationError')
 const app = express()
 
@@ -40,24 +39,33 @@ app.use('/areas', require('./routes/areas'))
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, _) => {
   if (err.statusCode) {
-    return res.status(err.statusCode).json({ msg: err.message })
+    return res
+      .status(err.statusCode)
+      .json({ error: { code: err.statusCode, message: err.message } })
   }
   if (
     err instanceof mongoose.Error.ValidationError ||
-    err.name === VALIDATION_ERROR ||
     err instanceof ValidationError
   ) {
-    res.status(422).json({ msg: err.message })
+    res.status(422).json({
+      error: {
+        code: 422,
+        message: err.message,
+      },
+    })
   }
   logger.error(err)
   res.status(500).json({
-    msg: err.clientMsg || 'Oops, something went wrong..',
+    error: {
+      code: 500,
+      message: err.message,
+    },
   })
 })
 
 // Custom 404 in JSON
 app.use((req, res) => {
-  res.status(404).json({ message: 'Not found' })
+  res.status(404).json({ error: { code: 404, message: 'Not found' } })
 })
 
 const port = process.env.PORT || 5000
