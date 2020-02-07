@@ -12,7 +12,7 @@ const ValidationError = require('../errors/ValidationError')
 const jwt = require('../lib/jwt')
 
 // @route   GET /publishers
-// @desc    Get all publishers, possibly filtered with query string param area
+// @desc    Get all publishers, possibly filtered with query params area & id
 // @access  Public
 router.get('/', async (req, res, next) => {
   try {
@@ -20,8 +20,8 @@ router.get('/', async (req, res, next) => {
     if (req.query.area) {
       match.area = { $in: req.query.area }
     }
-    if (req.query.publisher) {
-      match._id = { $in: req.query.publisher }
+    if (req.query.id) {
+      match._id = { $in: req.query.id }
     }
     const publishers = await Publisher.find({ ...match }, 'name').populate(
       'area',
@@ -38,7 +38,10 @@ router.get('/', async (req, res, next) => {
 // @access  Public
 router.get('/:id', async (req, res, next) => {
   try {
-    const publisher = await Publisher.findById(req.params.id, 'name')
+    const publisher = await Publisher.findById(req.params.id, 'name').populate(
+      'area',
+      'name population'
+    )
     if (!publisher) {
       return next()
     }
@@ -89,9 +92,14 @@ router.post('/login', async (req, res, next) => {
       process.env.JWT_SECRET,
       { expiresIn: 3600 }
     )
-    return res.json({
-      token,
-    })
+    return res
+      .header('Cache-Control', 'no-store')
+      .header('Pragma', 'no-cache')
+      .json({
+        access_token: token,
+        token_type: 'bearer',
+        expires_in: 3600,
+      })
   } catch (e) {
     next(e)
   }

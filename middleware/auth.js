@@ -13,7 +13,6 @@ const jwt = require('../lib/jwt')
  */
 const auth = async (req, res, next) => {
   try {
-    console.log('PARAMS', req.params)
     if (!req.headers.authorization) {
       throw new Error('Authorization needed')
     }
