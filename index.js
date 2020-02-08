@@ -49,7 +49,7 @@ app.use((err, req, res, _) => {
   ) {
     res.status(422).json({
       error: {
-        code: 422,
+        code: 'ValidationError',
         message: err.message,
       },
     })

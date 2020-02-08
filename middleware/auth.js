@@ -31,7 +31,7 @@ const auth = async (req, res, next) => {
     return res
       .status(401)
       .header('WWW-Authenticate', 'Bearer')
-      .json({ msg: e.message })
+      .json({ error: { code: 401, message: e.message } })
   }
 }
 

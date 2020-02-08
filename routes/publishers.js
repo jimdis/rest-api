@@ -88,14 +88,12 @@ router.post('/login', async (req, res, next) => {
     const passwordMatch =
       publisher && (await bcrypt.compare(password, publisher.password))
     if (!passwordMatch) {
-      return res
-        .status(403)
-        .json({
-          error: {
-            code: 403,
-            messsage: 'Email/password combination is incorrect',
-          },
-        })
+      return res.status(403).json({
+        error: {
+          code: 403,
+          message: 'Email/password combination is incorrect',
+        },
+      })
     }
     const token = await jwt.signToken(
       { id: publisher.id },
