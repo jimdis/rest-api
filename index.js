@@ -27,12 +27,29 @@ app.use(
   })
 )
 app.use(compression())
-app.use(cors())
+
+app.use(cors({ preflightContinue: true }))
 
 // Routes
+app.use('/auth', require('./routes/auth'))
 app.use('/ads', require('./routes/ads'))
 app.use('/publishers', require('./routes/publishers'))
 app.use('/areas', require('./routes/areas'))
+
+// Handle OPTIONS and 405
+app.use((req, res, next) => {
+  try {
+    if (req.method === 'OPTIONS') {
+      return res.status(204).send()
+    }
+    if (!res.get('Allow').includes(req.method)) {
+      return res.status(405).send()
+    }
+    next()
+  } catch (e) {
+    next(e)
+  }
+})
 
 // Error handler. Catches errors and sends 500 Internal Server Error for non-specific errors.
 // Needs 4 arguments to work as middleware with error handling, even though last arg is not used...
@@ -63,9 +80,9 @@ app.use((err, req, res, _) => {
   })
 })
 
-// Custom 404 in JSON
+// Handle 404
 app.use((req, res) => {
-  res.status(404).json({ error: { code: 404, message: 'Not found' } })
+  return res.status(404).json({ error: { code: 404, message: 'Not found' } })
 })
 
 const port = process.env.PORT || 5000
