@@ -6,14 +6,12 @@
 const express = require('express')
 const router = express.Router()
 const auth = require('../middleware/auth')
+const allow = require('../middleware/allow')
 const Publisher = require('../models/Publisher')
 
 router
   .route('/')
-  .all((req, res, next) => {
-    res.header('Allow', 'GET, POST, HEAD, OPTIONS')
-    next()
-  })
+  .all(allow('GET, POST, HEAD, OPTIONS'))
   // Get all publishers
   .get(async (req, res, next) => {
     try {
@@ -55,10 +53,7 @@ router
 
 router
   .route('/:id')
-  .all((req, res, next) => {
-    res.header('Allow', 'GET, PUT, DELETE, HEAD, OPTIONS')
-    next()
-  })
+  .all(allow('GET, PUT, DELETE, HEAD, OPTIONS'))
   // Get publisher with :id
   .get(async (req, res, next) => {
     try {
@@ -110,13 +105,10 @@ router
     }
   })
 
-// Get Private publisher details based on ID
 router
   .route('/:id/details')
-  .all((req, res, next) => {
-    res.header('Allow', 'GET, HEAD, OPTIONS')
-    next()
-  })
+  .all(allow('GET, HEAD, OPTIONS'))
+  // Get Private publisher details based on ID
   .get(auth, async (req, res, next) => {
     try {
       const publisher = await Publisher.findById(

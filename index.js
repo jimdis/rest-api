@@ -28,7 +28,7 @@ app.use(
 )
 app.use(compression())
 
-app.use(cors({ preflightContinue: true }))
+app.use(cors({ methods: [], preflightContinue: true }))
 
 // Routes
 app.use('/auth', require('./routes/auth'))
@@ -40,10 +40,16 @@ app.use('/areas', require('./routes/areas'))
 app.use((req, res, next) => {
   try {
     if (req.method === 'OPTIONS') {
-      return res.status(204).send()
+      return res
+        .status(204)
+        .header('Access-Control-Allow-Methods', res.allow)
+        .send()
     }
-    if (!res.get('Allow').includes(req.method)) {
-      return res.status(405).send()
+    if (!res.allow.includes(req.method)) {
+      return res
+        .status(405)
+        .header('Allow', res.allow)
+        .send()
     }
     next()
   } catch (e) {

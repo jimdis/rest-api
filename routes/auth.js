@@ -12,6 +12,10 @@ const jwt = require('../lib/jwt')
 
 router
   .route('/')
+  .all((req, res, next) => {
+    res.header('Allow', 'POST, OPTIONS')
+    next()
+  })
   // Login to get access token
   .post(async (req, res, next) => {
     try {
