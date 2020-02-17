@@ -4,10 +4,10 @@ const express = require('express')
 const compression = require('compression')
 const cors = require('cors')
 const morgan = require('morgan')
-const mongoose = require('mongoose')
 const db = require('./config/db')
 const logger = require('./config/logger')
-const ValidationError = require('./errors/ValidationError')
+const errors = require('./middleware/errors')
+const allow = require('./middleware/allow').handleAllow
 const app = express()
 
 // connect to the database
@@ -36,56 +36,10 @@ app.use('/ads', require('./routes/ads'))
 app.use('/publishers', require('./routes/publishers'))
 app.use('/areas', require('./routes/areas'))
 
-// Handle OPTIONS and 405
-app.use((req, res, next) => {
-  try {
-    if (req.method === 'OPTIONS') {
-      return res
-        .status(204)
-        .header('Access-Control-Allow-Methods', res.allow)
-        .send()
-    }
-    if (!res.allow.includes(req.method)) {
-      return res
-        .status(405)
-        .header('Allow', res.allow)
-        .send()
-    }
-    next()
-  } catch (e) {
-    next(e)
-  }
-})
-
-// Error handler. Catches errors and sends 500 Internal Server Error for non-specific errors.
-// Needs 4 arguments to work as middleware with error handling, even though last arg is not used...
-// eslint-disable-next-line no-unused-vars
-app.use((err, req, res, _) => {
-  if (err.statusCode) {
-    return res
-      .status(err.statusCode)
-      .json({ error: { code: err.statusCode, message: err.message } })
-  }
-  if (
-    err instanceof mongoose.Error.ValidationError ||
-    err instanceof ValidationError
-  ) {
-    res.status(422).json({
-      error: {
-        code: 'ValidationError',
-        message: err.message,
-      },
-    })
-  }
-  logger.error(err)
-  res.status(500).json({
-    error: {
-      code: 500,
-      message: err.message,
-    },
-  })
-})
-
+// Handle OPTIONS and 405 allow headers
+app.use(allow)
+// Handle errors
+app.use(errors)
 // Handle 404
 app.use((req, res) => {
   return res.status(404).json({ error: { code: 404, message: 'Not found' } })

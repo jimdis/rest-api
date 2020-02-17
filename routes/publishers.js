@@ -6,7 +6,7 @@
 const express = require('express')
 const router = express.Router()
 const auth = require('../middleware/auth')
-const allow = require('../middleware/allow')
+const allow = require('../middleware/allow').addAllow
 const Publisher = require('../models/Publisher')
 
 router
