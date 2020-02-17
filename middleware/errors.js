@@ -19,7 +19,7 @@ module.exports = (err, req, res, _) => {
     err instanceof mongoose.Error.ValidationError ||
     err instanceof ValidationError
   ) {
-    res.status(422).json({
+    return res.status(422).json({
       error: {
         code: 'ValidationError',
         message: err.message,

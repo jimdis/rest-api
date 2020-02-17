@@ -1,5 +1,6 @@
 'use strict'
 const mongoose = require('mongoose')
+const cachegoose = require('cachegoose')
 const shortid = require('shortid')
 const bcrypt = require('bcryptjs')
 const validator = require('validator').default
@@ -65,6 +66,12 @@ schema.pre('save', async function(next) {
   if (!area) {
     next(new ValidationError(`Invalid area ${this.area}`))
   }
+})
+
+schema.post('save', function(doc, next) {
+  console.log('clearing cache..')
+  cachegoose.clearCache()
+  next()
 })
 
 // Custom error handling middleware for duplicate keys

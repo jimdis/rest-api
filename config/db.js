@@ -1,8 +1,11 @@
 'use strict'
+const cachegoose = require('cachegoose')
 const mongoose = require('mongoose')
 const logger = require('./logger')
 require('../models/Publisher')
 require('../models/Area')
+
+cachegoose(mongoose)
 
 /**
  * Establishes a connection to a database.
@@ -14,10 +17,8 @@ module.exports.connect = async () => {
   mongoose.connection.on('connected', () =>
     console.log('Mongoose connection is open.')
   )
-  // Removed below because it prevented error from being thrown on connect.
-  // mongoose.connection.on('error', err =>
-  //   console.error(`Mongoose connection error has occurred: ${err}`)
-  // )
+  // mongoose.set('debug', true)
+
   mongoose.connection.on('disconnected', () =>
     logger.info('Mongoose connection is disconnected.')
   )

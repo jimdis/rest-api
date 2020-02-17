@@ -19,7 +19,7 @@ const handleAllow = (req, res, next) => {
         .header('Access-Control-Allow-Methods', req.allow)
         .send()
     }
-    if (!req.allow.includes(req.method)) {
+    if (req.allow && !req.allow.includes(req.method)) {
       return res
         .status(405)
         .header('Allow', req.allow)

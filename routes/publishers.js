@@ -22,10 +22,10 @@ router
       if (req.query.id) {
         match._id = { $in: req.query.id }
       }
-      const publishers = await Publisher.find({ ...match }, 'name').populate(
-        'area',
-        'name population'
-      )
+      const publishers = await Publisher.find({ ...match }, 'name')
+        .populate('area', 'name population')
+        .lean()
+        .cache(60)
       return res.json({ items: publishers })
     } catch (e) {
       next(e)
@@ -57,10 +57,9 @@ router
   // Get publisher with :id
   .get(async (req, res, next) => {
     try {
-      const publisher = await Publisher.findById(
-        req.params.id,
-        'name'
-      ).populate('area', 'name population')
+      const publisher = await Publisher.findById(req.params.id, 'name')
+        .populate('area', 'name population')
+        .cache(60)
       if (!publisher) {
         return next()
       }
@@ -111,10 +110,9 @@ router
   // Get Private publisher details based on ID
   .get(auth, async (req, res, next) => {
     try {
-      const publisher = await Publisher.findById(
-        req.token.id,
-        '-password -__v'
-      ).populate('area', 'name population')
+      const publisher = await Publisher.findById(req.token.id, '-password -__v')
+        .populate('area', 'name population')
+        .cache(60)
       if (!publisher) {
         next()
       }
