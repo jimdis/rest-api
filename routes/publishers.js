@@ -8,6 +8,7 @@ const router = express.Router()
 const auth = require('../middleware/auth')
 const allow = require('../middleware/allow').addAllow
 const Publisher = require('../models/Publisher')
+const ForbiddenError = require('../errors/ForbiddenError')
 
 const getUrl = req => req.protocol + '://' + req.get('host') + req.originalUrl
 
@@ -40,6 +41,7 @@ router
     }
   })
   // Create new publisher
+  //TODO: Add password hashing middleware?
   .post(async (req, res, next) => {
     try {
       const { name, area, email, password } = req.body
@@ -61,7 +63,7 @@ router
 
 router
   .route('/:id')
-  .all(allow('GET, PUT, DELETE, HEAD, OPTIONS'))
+  .all(allow('GET, PATCH, DELETE, HEAD, OPTIONS'))
   // Get publisher with :id
   .get(async (req, res, next) => {
     try {
@@ -77,30 +79,32 @@ router
       next(e)
     }
   })
-  // Update publisher with :id
-  .put(auth, async (req, res, next) => {
+  // Edit publisher with :id
+  //TODO: Add password hashing middleware?
+  .patch(auth, async (req, res, next) => {
     try {
-      const { name, area, email, password } = req.body
-      let publisher = await Publisher.findById(req.token.id)
+      const { id } = req.token.id
+      let publisher = await Publisher.findById(req.params.id)
       if (!publisher) {
         return next()
       }
-      publisher.name = name
-      publisher.area = area
-      publisher.email = email
-      publisher.password = password
-      publisher = await publisher.save()
-      return res.json({
-        _id: publisher._id,
-        name: publisher.name,
-        email: publisher.email,
-        area: publisher.area,
+      if (publisher._id !== id) {
+        return next(new ForbiddenError())
+      }
+      const ignoreKeys = ['_id']
+      Object.keys(req.body).forEach(key => {
+        if (ignoreKeys.includes(key)) {
+          return
+        }
+        publisher[key] = req.body[key]
       })
+      return res.json({ ...publisher, password: undefined })
     } catch (e) {
       next(e)
     }
   })
   // Delete publisher with id
+  //TODO: Add check 403
   .delete(auth, async (req, res, next) => {
     try {
       const doc = await Publisher.findByIdAndDelete(req.token.id)

@@ -56,6 +56,7 @@ const schema = new mongoose.Schema(
 )
 
 // Password hashing middleware
+//TODO: Need to move outside Model. Otherwise new password hash is created on every save/update.
 schema.pre('save', async function(next) {
   const passwordHash = await bcrypt.hash(this.password, 12)
   this.password = passwordHash

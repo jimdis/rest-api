@@ -22,9 +22,6 @@ const auth = async (req, res, next) => {
     }
     const token = parts[1]
     const decoded = await jwt.verifyToken(token, process.env.JWT_SECRET)
-    if (req.params.id && decoded.id !== req.params.id) {
-      throw new Error('Token does not match requested resource')
-    }
     req.token = decoded
     next()
   } catch (e) {
