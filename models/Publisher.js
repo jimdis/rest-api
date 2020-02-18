@@ -57,9 +57,7 @@ const schema = new mongoose.Schema(
 
 // Password hashing middleware
 schema.pre('save', async function(next) {
-  console.log(this.password)
   const passwordHash = await bcrypt.hash(this.password, 12)
-  console.log(passwordHash)
   this.password = passwordHash
   this.name = validator.escape(this.name)
   const area = await Area.findById(this.area)
@@ -69,7 +67,6 @@ schema.pre('save', async function(next) {
 })
 
 schema.post('save', function(doc, next) {
-  console.log('clearing cache..')
   cachegoose.clearCache()
   next()
 })

@@ -17,7 +17,7 @@ module.exports.connect = async () => {
   mongoose.connection.on('connected', () =>
     console.log('Mongoose connection is open.')
   )
-  // mongoose.set('debug', true)
+  mongoose.set('debug', true)
 
   mongoose.connection.on('disconnected', () =>
     logger.info('Mongoose connection is disconnected.')

@@ -9,6 +9,8 @@ const auth = require('../middleware/auth')
 const allow = require('../middleware/allow').addAllow
 const Publisher = require('../models/Publisher')
 
+const getUrl = req => req.protocol + '://' + req.get('host') + req.originalUrl
+
 router
   .route('/')
   .all(allow('GET, POST, HEAD, OPTIONS'))
@@ -26,7 +28,13 @@ router
         .populate('area', 'name population')
         .lean()
         .cache(60)
-      return res.json({ items: publishers })
+      return res.json({
+        items: publishers.map(p => ({
+          ...p,
+          _links: { self: `${getUrl(req)}/${p._id}` },
+          //TODO: Add link to ads!
+        })),
+      })
     } catch (e) {
       next(e)
     }
@@ -64,6 +72,7 @@ router
         return next()
       }
       return res.json(publisher)
+      //TODO: Add link to ads
     } catch (e) {
       next(e)
     }
@@ -117,6 +126,7 @@ router
         next()
       }
       return res.json(publisher)
+      //TODO: Add link to ads
     } catch (e) {
       next(e)
     }
