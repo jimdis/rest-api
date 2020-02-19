@@ -2,18 +2,9 @@
 const mongoose = require('mongoose')
 const cachegoose = require('cachegoose')
 const shortid = require('shortid')
-const bcrypt = require('bcryptjs')
 const validator = require('validator').default
-const passwordValidator = require('password-validator')
 const ValidationError = require('../errors/ValidationError')
 const Area = require('./Area')
-
-const passwordSchema = new passwordValidator()
-passwordSchema.is().min(8)
-passwordSchema.is().max(100)
-passwordSchema.has().uppercase()
-passwordSchema.has().lowercase()
-passwordSchema.has().digits()
 
 const schema = new mongoose.Schema(
   {
@@ -45,21 +36,16 @@ const schema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      validate: {
-        validator: v => passwordSchema.validate(v),
-        message:
-          'Password must be at least 8 chars, max 100 chars, one lowercase, one uppercase, one digit.',
-      },
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toObject: { transform: (doc, ret) => ({ ...ret, password: undefined }) },
+  }
 )
 
-// Password hashing middleware
-//TODO: Need to move outside Model. Otherwise new password hash is created on every save/update.
+// Area exists validation
 schema.pre('save', async function(next) {
-  const passwordHash = await bcrypt.hash(this.password, 12)
-  this.password = passwordHash
   this.name = validator.escape(this.name)
   const area = await Area.findById(this.area)
   if (!area) {

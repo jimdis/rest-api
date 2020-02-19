@@ -33,13 +33,13 @@ module.exports.connect = async () => {
     })
   })
 
-  let dbConnectionString
+  const dbConnectionString = process.env.DB_TEST
 
-  if (process.env.NODE_ENV === 'production') {
-    dbConnectionString = process.env.DB_PROD
-  } else {
-    dbConnectionString = process.env.DB_TEST
-  }
+  // if (process.env.NODE_ENV === 'production') {
+  //   dbConnectionString = process.env.DB_PROD
+  // } else {
+  //   dbConnectionString = process.env.DB_TEST
+  // }
 
   // Check that .env file with key exists.
   if (!dbConnectionString)
