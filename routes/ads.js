@@ -10,8 +10,7 @@ const allow = require('../middleware/allow').addAllow
 const Ad = require('../models/Ad')
 const Publisher = require('../models/Publisher')
 const ForbiddenError = require('../errors/ForbiddenError')
-
-const getUrl = req => req.protocol + '://' + req.get('host')
+const createLinks = require('../lib/createLinks')
 
 router
   .route('/')
@@ -26,18 +25,46 @@ router
       if (req.query.publisher) {
         match.publisher = { $in: req.query.publisher }
       }
-      const ads = await Ad.find({ ...match }, '-__v')
-        .populate('area', 'name population')
-        .populate('publisher', 'name')
+      let limit = parseInt(req.query.limit)
+      if (!limit || limit > 200) {
+        limit = 200
+      }
+      const skip = parseInt(req.query.skip) || null
+      const count = await Ad.count({ ...match })
+      const ads = await Ad.find({ ...match }, '-__v -createdAt -updatedAt')
+        .sort('updatedAt desc')
+        .skip(skip)
+        .limit(limit)
         .lean()
         .cache(60)
+
+      let newUrl
+      newUrl = req.originalUrl.replace(
+        `limit=${req.query.limit}`,
+        `limit=${limit}`
+      )
+      const skipStart = req.originalUrl.indexOf('skip')
+      if (skipStart !== -1) {
+        newUrl = newUrl.replace(
+          `skip=${req.query.skip}`,
+          `skip=${skip + limit}`
+        )
+      } else {
+        const separator = newUrl.indexOf('?') !== -1 ? '&' : '?'
+        newUrl = `${newUrl}${separator}skip=${skip + limit}`
+      }
+      console.log(newUrl)
+
       return res.json({
+        totalCount: count,
+        itemCount: count > limit ? limit : count,
+        next:
+          count > limit
+            ? `${req.protocol}://${req.get('host')}${newUrl}`
+            : undefined,
         items: ads.map(ad => ({
           ...ad,
-          _links: {
-            self: `${getUrl(req)}/ads/${ad._id}`,
-            publisher: `${getUrl(req)}/publishers/${ad.publisher._id}`,
-          },
+          _links: createLinks.ad(req, ad),
         })),
       })
     } catch (e) {
@@ -55,10 +82,12 @@ router
         area: publisher.area,
       })
       ad = await ad.save()
+      ad = ad.toObject()
+      const links = createLinks.ad(req, ad)
       return res
         .status(201)
-        .header('Location', `${getUrl(req)}/ads/${ad._id}`)
-        .json(ad)
+        .header('Location', links.self)
+        .json({ ...ad, _links: links })
     } catch (e) {
       next(e)
     }
@@ -80,13 +109,8 @@ router
       }
       return res.json({
         ...ad,
-        _links: {
-          self: `${getUrl(req)}/ads/${ad._id}`,
-          publisher: `${getUrl(req)}/publishers/${ad.publisher._id}`,
-          area: `${getUrl(req)}/areas/${ad.area._id}`,
-        },
+        _links: createLinks.ad(req, ad),
       })
-      //TODO: Add link to ads
     } catch (e) {
       next(e)
     }
@@ -94,13 +118,13 @@ router
   // Edit ad with :id
   .patch(auth, async (req, res, next) => {
     try {
-      const { id } = req.token
+      const publisherId = req.token.id
       let ad = await Ad.findById(req.params.id)
       if (!ad) {
         return next()
       }
-      if (ad.publisher !== id) {
-        return next(new ForbiddenError())
+      if (ad.publisher !== publisherId) {
+        throw new ForbiddenError()
       }
       const ignoreKeys = ['_id', 'publisher', 'area']
       Object.keys(req.body).forEach(key => {
@@ -110,39 +134,25 @@ router
         ad[key] = req.body[key]
       })
       ad = await ad.save()
-      return res.json(ad)
+      ad = ad.toObject()
+      return res.json({ ...ad, _links: createLinks.ad(req, ad) })
     } catch (e) {
       next(e)
     }
   })
   // Delete ad with id
-  //TODO: Add check 403
   .delete(auth, async (req, res, next) => {
     try {
-      const doc = await Ad.findByIdAndDelete(req.token.id)
-      if (!doc) {
+      const publisherId = req.token.id
+      const ad = await Ad.findById(req.params.id)
+      if (!ad) {
         return next()
       }
-      return res.status(204).send()
-    } catch (e) {
-      next(e)
-    }
-  })
-
-router
-  .route('/:id/details')
-  .all(allow('GET, HEAD, OPTIONS'))
-  // Get Private ad details based on ID
-  .get(auth, async (req, res, next) => {
-    try {
-      const ad = await Ad.findById(req.token.id, '-password -__v')
-        .populate('area', 'name population')
-        .cache(60)
-      if (!ad) {
-        next()
+      if (ad.publisher !== publisherId) {
+        throw new ForbiddenError()
       }
-      return res.json(ad)
-      //TODO: Add link to ads
+      await ad.remove()
+      return res.status(204).send()
     } catch (e) {
       next(e)
     }
