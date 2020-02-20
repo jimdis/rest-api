@@ -22,7 +22,6 @@ const auth = async (req, res, next) => {
     }
     const token = parts[1]
     const decoded = await jwt.verifyToken(token, process.env.JWT_SECRET)
-    console.log(decoded)
     req.token = decoded
     next()
   } catch (e) {

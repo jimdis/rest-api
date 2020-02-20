@@ -1,7 +1,7 @@
 class ForbiddenError extends Error {
-  constructor() {
+  constructor(message) {
     super()
-    this.message = 'Your token does not match the requested resource'
+    this.message = message || 'Your token does not match the requested resource'
     this.statusCode = 403
   }
 }

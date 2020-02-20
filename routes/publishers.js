@@ -26,7 +26,7 @@ router
       if (req.query.id) {
         match._id = { $in: req.query.id }
       }
-      const publishers = await Publisher.find({ ...match }, 'name')
+      const publishers = await Publisher.find({ ...match }, 'name area')
         .lean()
         .cache(60)
       return res.json({
@@ -135,7 +135,6 @@ router
   .get(auth, async (req, res, next) => {
     try {
       const { id } = req.token
-      console.log(id)
       if (req.params.id !== id) {
         throw new ForbiddenError()
       }

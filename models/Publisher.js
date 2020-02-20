@@ -58,6 +58,11 @@ schema.post('save', function(doc, next) {
   next()
 })
 
+schema.post('remove', function(doc, next) {
+  cachegoose.clearCache()
+  next()
+})
+
 // Custom error handling middleware for duplicate keys
 schema.post('save', function(error, doc, next) {
   if (error.name === 'MongoError' && error.code === 11000) {

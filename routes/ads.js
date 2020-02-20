@@ -45,7 +45,6 @@ router
       )
       const skipExists = req.originalUrl.indexOf('$skip') !== -1
       if (skipExists) {
-        console.log(newUrl)
         newUrl = newUrl.replace(
           `$skip=${req.query.$skip}`,
           `$skip=${skip + limit}`
@@ -54,7 +53,6 @@ router
         const separator = newUrl.indexOf('?') !== -1 ? '&' : '?'
         newUrl = `${newUrl}${separator}$skip=${skip + limit}`
       }
-      console.log(newUrl)
 
       return res.json({
         totalCount: count,
@@ -77,6 +75,9 @@ router
     try {
       const { id } = req.token
       const publisher = await Publisher.findById(id)
+      if (!publisher) {
+        return next()
+      }
       let ad = new Ad({
         ...req.body,
         publisher: publisher._id,

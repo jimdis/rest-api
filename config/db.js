@@ -15,9 +15,10 @@ cachegoose(mongoose)
 module.exports.connect = async () => {
   // Bind connection to events (to get notifications).
   mongoose.connection.on('connected', () =>
-    console.log('Mongoose connection is open.')
+    logger.info('Mongoose connection is open.')
   )
-  mongoose.set('debug', true)
+  // Enable below in dev to see db queries
+  // mongoose.set('debug', true)
 
   mongoose.connection.on('disconnected', () =>
     logger.info('Mongoose connection is disconnected.')
@@ -34,12 +35,6 @@ module.exports.connect = async () => {
   })
 
   const dbConnectionString = process.env.DB_TEST
-
-  // if (process.env.NODE_ENV === 'production') {
-  //   dbConnectionString = process.env.DB_PROD
-  // } else {
-  //   dbConnectionString = process.env.DB_TEST
-  // }
 
   // Check that .env file with key exists.
   if (!dbConnectionString)

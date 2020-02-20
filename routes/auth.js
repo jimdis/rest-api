@@ -8,7 +8,9 @@ const router = express.Router()
 const bcrypt = require('bcryptjs')
 const Publisher = require('../models/Publisher')
 const ValidationError = require('../errors/ValidationError')
+const ForbiddenError = require('../errors/ForbiddenError')
 const jwt = require('../lib/jwt')
+const createLinks = require('../lib/createLinks')
 
 router
   .route('/')
@@ -21,20 +23,13 @@ router
     try {
       const { email, password } = req.body
       if (!email || !password) {
-        next(new ValidationError('email and password fields must be provided'))
+        throw new ValidationError('email and password fields must be provided')
       }
-      console.log(email, password)
       const publisher = await Publisher.findOne({ email })
-      console.log(publisher)
       const passwordMatch =
         publisher && (await bcrypt.compare(password, publisher.password))
       if (!passwordMatch) {
-        return res.status(403).json({
-          error: {
-            code: 403,
-            message: 'Email/password combination is incorrect',
-          },
-        })
+        throw new ForbiddenError('Email/password combination is incorrect')
       }
       const token = await jwt.signToken(
         { id: publisher.id },
@@ -48,6 +43,7 @@ router
           accessToken: token,
           tokenType: 'bearer',
           expiresIn: 3600,
+          _links: createLinks.publisher(req, publisher),
         })
     } catch (e) {
       next(e)

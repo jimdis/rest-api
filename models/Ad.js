@@ -70,6 +70,11 @@ schema.post('save', function(doc, next) {
   next()
 })
 
+schema.post('remove', function(doc, next) {
+  cachegoose.clearCache()
+  next()
+})
+
 const Ad = mongoose.model('Ad', schema)
 
 module.exports = Ad

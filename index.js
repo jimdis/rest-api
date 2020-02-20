@@ -31,6 +31,7 @@ app.use(compression())
 app.use(cors({ methods: [], preflightContinue: true }))
 
 // Routes
+app.use('/', require('./routes/root'))
 app.use('/auth', require('./routes/auth'))
 app.use('/ads', require('./routes/ads'))
 app.use('/publishers', require('./routes/publishers'))

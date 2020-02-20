@@ -5,12 +5,10 @@
 'use strict'
 const express = require('express')
 const router = express.Router()
-const auth = require('../middleware/auth')
 const allow = require('../middleware/allow').addAllow
 const Area = require('../models/Area')
 const Ad = require('../models/Ad')
 const Publisher = require('../models/Publisher')
-const ForbiddenError = require('../errors/ForbiddenError')
 const createLinks = require('../lib/createLinks')
 
 router
@@ -22,12 +20,12 @@ router
       const areas = await Area.find({}, '-__v -createdAt -modifiedAt')
         .lean()
         .cache(60)
-      return res.json(
-        areas.map(a => ({
+      return res.json({
+        items: areas.map(a => ({
           ...a,
           _links: createLinks.area(req, a),
-        }))
-      )
+        })),
+      })
     } catch (e) {
       next(e)
     }
