@@ -25,10 +25,21 @@ const auth = async (req, res, next) => {
     req.token = decoded
     next()
   } catch (e) {
+    const authUrl = req.protocol + '://' + req.get('host') + '/auth'
     return res
       .status(401)
       .header('WWW-Authenticate', 'Bearer')
-      .json({ error: { code: 401, message: e.message } })
+      .json({
+        error: { code: 401, message: e.message },
+        auth: {
+          link: authUrl,
+          method: 'POST',
+          body: {
+            email: 'registered email',
+            password: 'registered password',
+          },
+        },
+      })
   }
 }
 

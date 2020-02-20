@@ -19,6 +19,7 @@ router
           publishers: baseUrl + '/publishers',
           ads: baseUrl + '/ads',
           areas: baseUrl + '/areas',
+          auth: baseUrl + '/auth',
         },
       })
     } catch (e) {
