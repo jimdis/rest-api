@@ -33,7 +33,7 @@ router
         items: publishers.map(p => {
           return {
             ...p,
-            _links: createLinks.publisher(req, p._id),
+            _links: createLinks.publisher(req, p),
           }
         }),
       })
@@ -46,7 +46,7 @@ router
     try {
       let publisher = new Publisher(req.body)
       publisher = await publisher.save()
-      const links = createLinks.publisher(req, publisher._id)
+      const links = createLinks.publisher(req, publisher)
       publisher = publisher.toObject()
       return res
         .status(201)
@@ -75,7 +75,7 @@ router
       }
       return res.json({
         ...publisher,
-        _links: createLinks.publisher(req, publisher._id),
+        _links: createLinks.publisher(req, publisher),
       })
     } catch (e) {
       next(e)
@@ -103,7 +103,7 @@ router
       publisher = publisher.toObject()
       return res.json({
         ...publisher,
-        _links: createLinks.publisher(req, id),
+        _links: createLinks.publisher(req, publisher),
       })
     } catch (e) {
       next(e)
@@ -148,7 +148,7 @@ router
       }
       return res.json({
         ...publisher,
-        _links: createLinks.publisher(req, publisher._id),
+        _links: createLinks.publisher(req, publisher),
       })
     } catch (e) {
       next(e)
@@ -168,7 +168,7 @@ router
         items: ads.map(ad => {
           return {
             ...ad,
-            _links: createLinks.ad(req, ad._id, ad.publisher),
+            _links: createLinks.ad(req, ad),
           }
         }),
       })

@@ -4,6 +4,8 @@ const cachegoose = require('cachegoose')
 const shortid = require('shortid')
 const validator = require('validator').default
 
+const sanitize = value => validator.escape(value).trim()
+
 const schema = new mongoose.Schema(
   {
     _id: {
@@ -25,18 +27,21 @@ const schema = new mongoose.Schema(
       required: true,
       minlength: 1,
       maxlength: 30,
+      set: sanitize,
     },
     description: {
       type: String,
       required: true,
       minlength: 1,
       maxlength: 100,
+      set: sanitize,
     },
     body: {
       type: String,
       required: true,
       minlength: 1,
       maxlength: 2000,
+      set: sanitize,
     },
     validFrom: {
       type: Date,
@@ -59,8 +64,6 @@ const schema = new mongoose.Schema(
   },
   { timestamps: true }
 )
-
-//TODO: ADD pre save hook to sanitize data
 
 schema.post('save', function(doc, next) {
   cachegoose.clearCache()

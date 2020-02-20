@@ -25,11 +25,11 @@ router
       if (req.query.publisher) {
         match.publisher = { $in: req.query.publisher }
       }
-      let limit = parseInt(req.query.limit)
+      let limit = parseInt(req.query.$limit)
       if (!limit || limit > 200) {
         limit = 200
       }
-      const skip = parseInt(req.query.skip) || null
+      const skip = parseInt(req.query.$skip) || null
       const count = await Ad.count({ ...match })
       const ads = await Ad.find({ ...match }, '-__v -createdAt -updatedAt')
         .sort('updatedAt desc')
@@ -40,18 +40,19 @@ router
 
       let newUrl
       newUrl = req.originalUrl.replace(
-        `limit=${req.query.limit}`,
-        `limit=${limit}`
+        `$limit=${req.query.$limit}`,
+        `$limit=${limit}`
       )
-      const skipStart = req.originalUrl.indexOf('skip')
-      if (skipStart !== -1) {
+      const skipExists = req.originalUrl.indexOf('$skip') !== -1
+      if (skipExists) {
+        console.log(newUrl)
         newUrl = newUrl.replace(
-          `skip=${req.query.skip}`,
-          `skip=${skip + limit}`
+          `$skip=${req.query.$skip}`,
+          `$skip=${skip + limit}`
         )
       } else {
         const separator = newUrl.indexOf('?') !== -1 ? '&' : '?'
-        newUrl = `${newUrl}${separator}skip=${skip + limit}`
+        newUrl = `${newUrl}${separator}$skip=${skip + limit}`
       }
       console.log(newUrl)
 
