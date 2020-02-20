@@ -42,9 +42,10 @@ router
     }
   })
   // Create new publisher
+  //TODO: Add hook execution
   .post(hashPassword, async (req, res, next) => {
     try {
-      let publisher = new Publisher(req.body)
+      let publisher = new Publisher({ ...req.body, _id: undefined })
       publisher = await publisher.save()
       const links = createLinks.publisher(req, publisher)
       publisher = publisher.toObject()

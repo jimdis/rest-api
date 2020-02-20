@@ -71,6 +71,7 @@ router
     }
   })
   // Create new ad
+  //TODO: Add hook execution
   .post(auth, async (req, res, next) => {
     try {
       const { id } = req.token
@@ -80,6 +81,7 @@ router
       }
       let ad = new Ad({
         ...req.body,
+        _id: undefined,
         publisher: publisher._id,
         area: publisher.area,
       })
