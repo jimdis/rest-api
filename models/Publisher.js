@@ -5,6 +5,8 @@ const shortid = require('shortid')
 const validator = require('validator').default
 const ValidationError = require('../errors/ValidationError')
 const Area = require('./Area')
+const Ad = require('./Ad')
+const Hook = require('./Hook')
 
 const schema = new mongoose.Schema(
   {
@@ -58,7 +60,9 @@ schema.post('save', function(doc, next) {
   next()
 })
 
-schema.post('remove', function(doc, next) {
+schema.post('findOneAndDelete', async function(doc, next) {
+  await Ad.deleteMany({ publisher: doc._id })
+  await Hook.deleteMany({ publisher: doc._id })
   cachegoose.clearCache()
   next()
 })

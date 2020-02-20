@@ -11,6 +11,8 @@ const Ad = require('../models/Ad')
 const Publisher = require('../models/Publisher')
 const ForbiddenError = require('../errors/ForbiddenError')
 const createLinks = require('../lib/createLinks')
+const runHook = require('../lib/runHook')
+const actions = require('../lib/types').webhookActions
 
 router
   .route('/')
@@ -77,7 +79,7 @@ router
       const { id } = req.token
       const publisher = await Publisher.findById(id)
       if (!publisher) {
-        return next()
+        throw new ForbiddenError('Your token is not valid')
       }
       let ad = new Ad({
         ...req.body,
@@ -87,6 +89,7 @@ router
       })
       ad = await ad.save()
       ad = ad.toObject()
+      runHook(actions.newAd, ad)
       const links = createLinks.ad(req, ad)
       return res
         .status(201)
@@ -108,6 +111,7 @@ router
         .populate('publisher', 'name')
         .lean()
         .cache(60)
+      console.log(ad)
       if (!ad) {
         return next()
       }
@@ -138,6 +142,7 @@ router
         ad[key] = req.body[key]
       })
       ad = await ad.save()
+
       ad = ad.toObject()
       return res.json({ ...ad, _links: createLinks.ad(req, ad) })
     } catch (e) {

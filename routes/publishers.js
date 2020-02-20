@@ -12,6 +12,8 @@ const Publisher = require('../models/Publisher')
 const Ad = require('../models/Ad')
 const ForbiddenError = require('../errors/ForbiddenError')
 const createLinks = require('../lib/createLinks')
+const runHook = require('../lib/runHook')
+const actions = require('../lib/types').webhookActions
 
 router
   .route('/')
@@ -49,6 +51,7 @@ router
       publisher = await publisher.save()
       const links = createLinks.publisher(req, publisher)
       publisher = publisher.toObject()
+      runHook(actions.newPublisher, publisher)
       return res
         .status(201)
         .header('Location', links.self)

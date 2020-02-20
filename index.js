@@ -36,6 +36,7 @@ app.use('/auth', require('./routes/auth'))
 app.use('/ads', require('./routes/ads'))
 app.use('/publishers', require('./routes/publishers'))
 app.use('/areas', require('./routes/areas'))
+app.use('/hooks', require('./routes/hooks'))
 
 // Handle OPTIONS and 405 allow headers
 app.use(allow)

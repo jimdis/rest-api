@@ -7,7 +7,8 @@ const express = require('express')
 const router = express.Router()
 const auth = require('../middleware/auth')
 const allow = require('../middleware/allow').addAllow
-const Hook = require('../models/Publisher')
+const Hook = require('../models/Hook')
+const Publisher = require('../models/Publisher')
 const ForbiddenError = require('../errors/ForbiddenError')
 const createLinks = require('../lib/createLinks')
 
@@ -38,10 +39,14 @@ router
   .post(auth, async (req, res, next) => {
     try {
       const { id } = req.token
+      const publisher = await Publisher.findById(id)
+      if (!publisher) {
+        throw new ForbiddenError('Your token is not valid')
+      }
       const { action, callback } = req.body
       let hook = new Hook({ action, callback, publisher: id })
       hook = await hook.save()
-      const links = createLinks(req, id)
+      const links = createLinks.hook(req, hook)
       hook = hook.toObject()
       return res
         .status(201)

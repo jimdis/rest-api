@@ -3,6 +3,9 @@ const mongoose = require('mongoose')
 const cachegoose = require('cachegoose')
 const shortid = require('shortid')
 const validator = require('validator').default
+const actions = require('../lib/types').webhookActions
+
+const actionValues = Object.keys(actions).map(key => actions[key])
 
 const schema = new mongoose.Schema(
   {
@@ -19,8 +22,8 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
       validate: {
-        validator: v => ['newAd', 'newPublisher'].includes(v),
-        message: 'action needs to be one of "newAd" or "newPublisher"',
+        validator: v => actionValues.includes(v),
+        message: `action needs to be one of [${actionValues.join()}]`,
       },
     },
     callback: {
