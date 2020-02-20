@@ -10,7 +10,7 @@ const allow = require('../middleware/allow').addAllow
 router
   .route('/')
   .all(allow('GET, HEAD, OPTIONS'))
-  // Get all areas
+  // Get Links
   .get(async (req, res, next) => {
     try {
       const baseUrl = req.protocol + '://' + req.get('host')

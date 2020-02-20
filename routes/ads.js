@@ -73,7 +73,6 @@ router
     }
   })
   // Create new ad
-  //TODO: Add hook execution
   .post(auth, async (req, res, next) => {
     try {
       const { id } = req.token
@@ -111,7 +110,6 @@ router
         .populate('publisher', 'name')
         .lean()
         .cache(60)
-      console.log(ad)
       if (!ad) {
         return next()
       }

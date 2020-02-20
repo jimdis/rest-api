@@ -6,6 +6,7 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
+const allow = require('../middleware/allow').addAllow
 const Publisher = require('../models/Publisher')
 const ValidationError = require('../errors/ValidationError')
 const ForbiddenError = require('../errors/ForbiddenError')
@@ -14,10 +15,7 @@ const createLinks = require('../lib/createLinks')
 
 router
   .route('/')
-  .all((req, res, next) => {
-    res.header('Allow', 'POST, OPTIONS')
-    next()
-  })
+  .all(allow('GET, HEAD, OPTIONS'))
   // Login to get access token
   .post(async (req, res, next) => {
     try {
@@ -34,7 +32,7 @@ router
       const token = await jwt.signToken(
         { id: publisher.id },
         process.env.JWT_SECRET,
-        { expiresIn: 3600 }
+        { expiresIn: 600 }
       )
       return res
         .header('Cache-Control', 'no-store')
@@ -42,13 +40,12 @@ router
         .json({
           accessToken: token,
           tokenType: 'bearer',
-          expiresIn: 3600,
+          expiresIn: 600,
           _links: createLinks.publisher(req, publisher),
         })
     } catch (e) {
       next(e)
     }
   })
-  .all((req, res) => res.status(405).send())
 
 module.exports = router

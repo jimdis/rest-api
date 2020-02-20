@@ -1,5 +1,5 @@
 /**
- * API controllers for /publishers route
+ * API controllers for /hooks route
  */
 
 'use strict'
