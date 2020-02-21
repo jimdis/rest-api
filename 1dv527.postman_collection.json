@@ -1,0 +1,2214 @@
+{
+	"info": {
+		"_postman_id": "03b827f2-375f-4cbc-9ce6-90ff7486bdc2",
+		"name": "1dv527",
+		"description": "Collection of api for course 1dv527",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Entry",
+			"item": [
+				{
+					"name": "Entry links",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b2fba76a-7594-482a-9769-bc67ebe31c82",
+								"exec": [
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"_links property is present\", function () {",
+									"    pm.expect(jsonData._links).to.exist;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}",
+							"host": [
+								"{{ROOT_URL}}"
+							]
+						},
+						"description": "Gets entry links to api"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Publishers",
+			"item": [
+				{
+					"name": "All publishers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b2fba76a-7594-482a-9769-bc67ebe31c82",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const eTag = postman.getResponseHeader(\"Etag\")",
+									"pm.environment.set(\"ETAG\", eTag)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers"
+							]
+						},
+						"description": "/publishers endpoint GET request"
+					},
+					"response": []
+				},
+				{
+					"name": "Cached response",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b2fba76a-7594-482a-9769-bc67ebe31c82",
+								"exec": [
+									"pm.test(\"Status code is 304\", function () {",
+									"    pm.response.to.have.status(304);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "If-None-Match",
+								"value": "{{ETAG}}",
+								"type": "text"
+							},
+							{
+								"key": "Cache-Control",
+								"value": "max-age=0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers"
+							]
+						},
+						"description": "Should return 304"
+					},
+					"response": []
+				},
+				{
+					"name": "Publishers for specific areas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e622c325-dc31-4fec-8062-ed777e87d91e",
+								"exec": [
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Only areas 1984 & 0180 returned\", function () {",
+									"    jsonData.items.forEach(item => {",
+									"    pm.expect(item.area).to.be.oneOf(['1984', '0180']);",
+									"    })",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers?area=1984&area=0180",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers"
+							],
+							"query": [
+								{
+									"key": "area",
+									"value": "1984"
+								},
+								{
+									"key": "area",
+									"value": "0180"
+								}
+							]
+						},
+						"description": "Request all publishers with areas 1984 & 0180"
+					},
+					"response": []
+				},
+				{
+					"name": "Publishers with specific ids",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e1317b28-c5d2-44be-bdbb-4650276a9666",
+								"exec": [
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Only publishers dY0dsVKZ & 0rdtmyat returned\", function () {",
+									"    pm.expect(jsonData.items.length).to.equal(2)",
+									"    jsonData.items.forEach(item => {",
+									"    pm.expect(item._id).to.be.oneOf(['dY0dsVKZ', '0rdtmyat']);",
+									"    })",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers?id=dY0dsVKZ&id=0rdtmyat",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "dY0dsVKZ"
+								},
+								{
+									"key": "id",
+									"value": "0rdtmyat"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new publisher",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a0391125-7c1c-4715-9503-a1e9c3920d71",
+								"exec": [
+									"const jsonData = pm.response.json()",
+									"const id = jsonData._id",
+									"",
+									"pm.test(\"Publisher id returned\", function () {",
+									"    pm.expect(id).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Location header is present\", function () {",
+									"    pm.response.to.have.header(\"Location\");",
+									"});",
+									"if (id) {",
+									"pm.environment.set(\"PUBLISHER_ID\", id)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{PUBLISHER_NAME}}\",\n    \"email\": \"{{PUBLISHER_EMAIL}}\",\n    \"password\": \"{{PUBLISHER_PASSWORD}}\",\n    \"area\": \"{{PUBLISHER_AREA}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers"
+							]
+						},
+						"description": "POST new publisher to /publishers"
+					},
+					"response": []
+				},
+				{
+					"name": "Duplicate email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a0391125-7c1c-4715-9503-a1e9c3920d71",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{PUBLISHER_NAME}}\",\n    \"email\": \"{{PUBLISHER_EMAIL}}\",\n    \"password\": \"{{PUBLISHER_PASSWORD}}\",\n    \"area\": \"{{PUBLISHER_AREA}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers"
+							]
+						},
+						"description": "Should not allow multiple publishers with same email"
+					},
+					"response": []
+				},
+				{
+					"name": "Weak password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a0391125-7c1c-4715-9503-a1e9c3920d71",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Another name\",\n    \"email\": \"superuniqueemail@test.com\",\n    \"password\": \"DoesNotContainNumbers\",\n    \"area\": \"{{PUBLISHER_AREA}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers"
+							]
+						},
+						"description": "Weak password should return 422"
+					},
+					"response": []
+				},
+				{
+					"name": "Non-existing area",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a0391125-7c1c-4715-9503-a1e9c3920d71",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{PUBLISHER_NAME}}\",\n    \"email\": \"{{PUBLISHER_EMAIL}}\",\n    \"password\": \"{{PUBLISHER_PASSWORD}}\",\n    \"area\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers"
+							]
+						},
+						"description": "Should return 422 if area id does not exist in db"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e5b3fb30-2093-41b0-addc-dc53e187d1d8",
+								"exec": [
+									"const jsonData = pm.response.json()",
+									"const token = jsonData.accessToken",
+									"",
+									"pm.test(\"Token received\", function () {",
+									"    pm.expect(token).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Correct cache headers sent\", function () {",
+									"pm.expect(postman.getResponseHeader(\"Cache-control\")).to.equal(\"no-store\");",
+									"pm.expect(postman.getResponseHeader(\"Pragma\")).to.equal(\"no-cache\");",
+									"})",
+									"",
+									"",
+									"if (token ) {",
+									"    pm.environment.set(\"JWT_TOKEN\", token)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"{{PUBLISHER_EMAIL}}\",\n\t\"password\": \"{{PUBLISHER_PASSWORD}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/auth",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"auth"
+							]
+						},
+						"description": "Login with email and password to receive jwt access token"
+					},
+					"response": []
+				},
+				{
+					"name": "Bad login credentials",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3f7ead24-ef34-4cc6-b8e3-a745f95125ad",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"{{PUBLISHER_EMAIL}}\",\n\t\"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/auth",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publisher public details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7be3e2ac-1864-48cc-8b19-32837ddd77f3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers/{{PUBLISHER_ID}}",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers",
+								"{{PUBLISHER_ID}}"
+							]
+						},
+						"description": "Get public details from /publishers/:id"
+					},
+					"response": []
+				},
+				{
+					"name": "Publisher private details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "375832ee-4ac6-41f7-8512-07648ed06a45",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Publisher email is returned\", function () {",
+									"    pm.expect(jsonData.email).to.exist;",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers/{{PUBLISHER_ID}}/details",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers",
+								"{{PUBLISHER_ID}}",
+								"details"
+							]
+						},
+						"description": "Use JWT to access publisher private details"
+					},
+					"response": []
+				},
+				{
+					"name": "All ads by publisher",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "51d17853-9a51-4cf6-81ee-ab4c96d6d4cc",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers/5ZPp6DNnD/ads",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers",
+								"5ZPp6DNnD",
+								"ads"
+							]
+						},
+						"description": "Gets all ads from publisher id resource"
+					},
+					"response": []
+				},
+				{
+					"name": "Unauthorized private details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7e18d779-75c7-412d-8cef-396cbcd35762",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers/dY0dsVKZ/details",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers",
+								"dY0dsVKZ",
+								"details"
+							]
+						},
+						"description": "Should return 401"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit publisher",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c53edd75-8117-4ef8-9b80-69d61717e303",
+								"exec": [
+									"const jsonData = pm.response.json()",
+									"const newName = jsonData.name",
+									"",
+									"pm.test(\"Name changed\", function () {",
+									"    pm.expect(newName).to.equal('New Name');",
+									"});",
+									"",
+									"pm.test(\"Server-set fields are not modified\", function () {",
+									"    pm.expect(jsonData._id).to.not.equal('haxx0r');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"New Name\",\n\t\"_id\": \"h4xx0r\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers/{{PUBLISHER_ID}}",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers",
+								"{{PUBLISHER_ID}}"
+							]
+						},
+						"description": "Set a new name through PATCH /publishers/:id"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit publisher weak password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c53edd75-8117-4ef8-9b80-69d61717e303",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\": \"Abc123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers/{{PUBLISHER_ID}}",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers",
+								"{{PUBLISHER_ID}}"
+							]
+						},
+						"description": "Weak password should not be allowed"
+					},
+					"response": []
+				},
+				{
+					"name": "Unauthorized edit publisher name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c53edd75-8117-4ef8-9b80-69d61717e303",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"New Name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers/dY0dsVKZ",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers",
+								"dY0dsVKZ"
+							]
+						},
+						"description": "Should return 401"
+					},
+					"response": []
+				},
+				{
+					"name": "Unauthorized DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a14b50e4-2d7c-4693-9cd7-eaa06b79677d",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers/dY0dsVKZ",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers",
+								"dY0dsVKZ"
+							]
+						},
+						"description": "DELETE using no or wrong key should give 401"
+					},
+					"response": []
+				},
+				{
+					"name": "Non-existing path",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1c3e6674-08fd-4e0d-a0b3-cb22b4414422",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers/id/badpath",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers",
+								"id",
+								"badpath"
+							]
+						},
+						"description": "Non-existing path should return 404"
+					},
+					"response": []
+				}
+			],
+			"description": "Test /publishers endpoints",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Hooks",
+			"item": [
+				{
+					"name": "Create webhook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d82807b9-071e-4637-936f-c7f8ab44a384",
+								"exec": [
+									"const jsonData = pm.response.json()",
+									"const id = jsonData._id",
+									"",
+									"pm.test(\"Hook id returned\", function () {",
+									"    pm.expect(id).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Location header is present\", function () {",
+									"    pm.response.to.have.header(\"Location\");",
+									"});",
+									"",
+									"if (id) {",
+									"pm.environment.set(\"HOOK_ID\", id)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"action\": \"newPublisher\",\n\t\"callback\": \"https://webhook.site/c0fad125-740e-415d-9e29-b158d7b98ca4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/hooks",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"hooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all hooks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cd2de244-431d-4258-81ca-d2fd674589f7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Created hook is included\", function () {",
+									"    const hookId = pm.environment.get('HOOK_ID')",
+									"    pm.expect(jsonData.items.find(hook => hook._id === hookId)).to.exist;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/hooks",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"hooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit hook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a07abe60-88c8-4a7a-8daf-7d05d3c71627",
+								"exec": [
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"action changed\", function () {",
+									"    pm.expect(jsonData.action).to.equal('newAd');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"action\": \"newAd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/hooks/{{HOOK_ID}}",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"hooks",
+								"{{HOOK_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hook details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0306fe52-b0eb-476f-ba54-5def900844f8",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Details are given\", function () {",
+									"    pm.expect(jsonData.action).to.exist;",
+									"    pm.expect(jsonData.callback).to.exist;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/hooks/{{HOOK_ID}}",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"hooks",
+								"{{HOOK_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Ads",
+			"item": [
+				{
+					"name": "Get all ads",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cd2de244-431d-4258-81ca-d2fd674589f7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"itemCount is default 200\", function () {",
+									"    pm.expect(jsonData.itemCount).to.equal(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/ads",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"ads"
+							]
+						},
+						"description": "GET all ads"
+					},
+					"response": []
+				},
+				{
+					"name": "Get 100 first ads",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d82807b9-071e-4637-936f-c7f8ab44a384",
+								"exec": [
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"itemCount is 100\", function () {",
+									"    pm.expect(jsonData.itemCount).to.equal(100);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/ads?$limit=100",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"ads"
+							],
+							"query": [
+								{
+									"key": "$limit",
+									"value": "100"
+								}
+							]
+						},
+						"description": "Limit to 100 ads"
+					},
+					"response": []
+				},
+				{
+					"name": "Skip 100 ads",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d82807b9-071e-4637-936f-c7f8ab44a384",
+								"exec": [
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"itemCount is capped at 200\", function () {",
+									"    pm.expect(jsonData.itemCount).to.equal(200);",
+									"});",
+									"",
+									"pm.test(\"next url should skip 300\", function () {",
+									"    const next = jsonData.next",
+									"    pm.expect(next.substring(next.length - 3)).to.equal('300');",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/ads?$limit=400&$skip=100",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"ads"
+							],
+							"query": [
+								{
+									"key": "$limit",
+									"value": "400"
+								},
+								{
+									"key": "$skip",
+									"value": "100"
+								}
+							]
+						},
+						"description": "Skip 100 ads and get next 100 ads"
+					},
+					"response": []
+				},
+				{
+					"name": "Get ads in specific area",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d82807b9-071e-4637-936f-c7f8ab44a384",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Only areas 2132 & 2084 returned\", function () {",
+									"    jsonData.items.forEach(item => {",
+									"    pm.expect(item.area).to.be.oneOf(['2132', '2084']);",
+									"    })",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/ads?area=2132&area=2084",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"ads"
+							],
+							"query": [
+								{
+									"key": "area",
+									"value": "2132"
+								},
+								{
+									"key": "area",
+									"value": "2084"
+								}
+							]
+						},
+						"description": "Get all ads in areas 2132 & 2084"
+					},
+					"response": []
+				},
+				{
+					"name": "Get ads for specific publishers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d82807b9-071e-4637-936f-c7f8ab44a384",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Only publishers dY0dsVKZ & 0rdtmyat returned\", function () {",
+									"    jsonData.items.forEach(item => {",
+									"    pm.expect(item.publisher).to.be.oneOf(['dY0dsVKZ', '0rdtmyat']);",
+									"    })",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/ads?publisher=dY0dsVKZ&publisher=0rdtmyat",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"ads"
+							],
+							"query": [
+								{
+									"key": "publisher",
+									"value": "dY0dsVKZ"
+								},
+								{
+									"key": "publisher",
+									"value": "0rdtmyat"
+								}
+							]
+						},
+						"description": "Get ads for publishers with id=dY0dsVKZ&id=0rdtmyat"
+					},
+					"response": []
+				},
+				{
+					"name": "Create ad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d82807b9-071e-4637-936f-c7f8ab44a384",
+								"exec": [
+									"const jsonData = pm.response.json()",
+									"const id = jsonData._id",
+									"",
+									"pm.test(\"Ad id returned\", function () {",
+									"    pm.expect(id).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Location header is present\", function () {",
+									"    pm.response.to.have.header(\"Location\");",
+									"});",
+									"",
+									"pm.test(\"HTML tags are escaped\", function () {",
+									"    pm.expect(jsonData.body.indexOf('<')).to.equal(-1);",
+									"});",
+									"",
+									"if (id) {",
+									"pm.environment.set(\"AD_ID\", id)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Used bikes\",\n\t\"description\": \"Lots of pretty used bikes now available\",\n\t\"body\": \"Welcome! We have legally obtained a bunch of used bicycles for your bicycling enjoyment! All at VERY low prices! Cash only! <script>alert(hacked!)</script>\",\n\t\"validTo\": \"2021-03-10\",\n\t\"imageUrl\": \"https://www.theeventstation.co.uk/wp-content/uploads/2017/02/Mountain-Bikes.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/ads",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"ads"
+							]
+						},
+						"description": "Add a new ad"
+					},
+					"response": []
+				},
+				{
+					"name": "Create ad without token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d82807b9-071e-4637-936f-c7f8ab44a384",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Used bikes\",\n\t\"description\": \"Lots of pretty used bikes now available\",\n\t\"body\": \"Welcome! We have legally obtained a bunch of used bicycles for your bicycling enjoyment! All at VERY low prices! Cash only!\",\n\t\"validTo\": \"2021-03-10\",\n\t\"imageUrl\": \"https://www.theeventstation.co.uk/wp-content/uploads/2017/02/Mountain-Bikes.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/ads",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"ads"
+							]
+						},
+						"description": "POST without valid publisher token should fail"
+					},
+					"response": []
+				},
+				{
+					"name": "Ad details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0306fe52-b0eb-476f-ba54-5def900844f8",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Area and publisher are expanded\", function () {",
+									"    pm.expect(jsonData.publisher.name).to.exist;",
+									"    pm.expect(jsonData.area.name).to.exist;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/ads/{{AD_ID}}",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"ads",
+								"{{AD_ID}}"
+							]
+						},
+						"description": "Get ad details"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit ad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a07abe60-88c8-4a7a-8daf-7d05d3c71627",
+								"exec": [
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Server-set fields are not modified\", function () {",
+									"    pm.expect(jsonData._id).to.not.equal('haxx0r');",
+									"    pm.expect(jsonData.publisher).to.not.equal('haxx0r');",
+									"    pm.expect(jsonData.area).to.not.equal('haxx0r');",
+									"});",
+									"",
+									"pm.test(\"Title changed\", function () {",
+									"    pm.expect(jsonData.title).to.equal('Used bikes updated');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Used bikes updated\",\n\t\"_id\": \"haxx0r\",\n\t\"publisher\": \"haxx0r\",\n\t\"area\": \"haxx0r\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/ads/{{AD_ID}}",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"ads",
+								"{{AD_ID}}"
+							]
+						},
+						"description": "Edit an add with PATCH"
+					},
+					"response": []
+				},
+				{
+					"name": "Unauthorized edit ad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c53edd75-8117-4ef8-9b80-69d61717e303",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"New Name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/ads/4T9M2Wkuj",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"ads",
+								"4T9M2Wkuj"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unauthorized DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a14b50e4-2d7c-4693-9cd7-eaa06b79677d",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/ads/E4AF_Q1zR",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"ads",
+								"E4AF_Q1zR"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Requests to Ads url",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Areas",
+			"item": [
+				{
+					"name": "Get all areas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cd2de244-431d-4258-81ca-d2fd674589f7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/areas",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"areas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get area by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cd2de244-431d-4258-81ca-d2fd674589f7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Area name returned\", function () {",
+									"    pm.expect(jsonData.name).to.exist;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/areas/0880",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"areas",
+								"0880"
+							]
+						},
+						"description": "Get Kalmar"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all publishers in area",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cd2de244-431d-4258-81ca-d2fd674589f7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Only publishers in area 0880 are returned\", function () {",
+									"    jsonData.items.forEach(item => {",
+									"    pm.expect(item.area).to.equal('0880');",
+									"    })",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/areas/0880/publishers",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"areas",
+								"0880",
+								"publishers"
+							]
+						},
+						"description": "All publishers in Kalmar"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all ads in area",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cd2de244-431d-4258-81ca-d2fd674589f7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json()",
+									"",
+									"pm.test(\"Only ads in area 0880 are returned\", function () {",
+									"    jsonData.items.forEach(item => {",
+									"    pm.expect(item.area).to.equal('0880');",
+									"    })",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ROOT_URL}}/areas/0880/ads",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"areas",
+								"0880",
+								"ads"
+							]
+						},
+						"description": "Get all ads in Kalmar"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Cleanup",
+			"item": [
+				{
+					"name": "Delete ad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "72dfabfa-f649-4427-9983-1eccb20ed1de",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/ads/{{AD_ID}}",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"ads",
+								"{{AD_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete hook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "72dfabfa-f649-4427-9983-1eccb20ed1de",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/hooks/{{HOOK_ID}}",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"hooks",
+								"{{HOOK_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete publisher",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b991da33-03a2-450f-a825-e3dbab578293",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers/{{PUBLISHER_ID}}",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers",
+								"{{PUBLISHER_ID}}"
+							]
+						},
+						"description": "Deletes publisher created in earlier step"
+					},
+					"response": []
+				},
+				{
+					"name": "Ad is gone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0306fe52-b0eb-476f-ba54-5def900844f8",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/ads/{{AD_ID}}",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"ads",
+								"{{AD_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hook is gone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0306fe52-b0eb-476f-ba54-5def900844f8",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/ads/{{AD_ID}}",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"ads",
+								"{{AD_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publisher is gone",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7be3e2ac-1864-48cc-8b19-32837ddd77f3",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ROOT_URL}}/publishers/{{PUBLISHER_ID}}",
+							"host": [
+								"{{ROOT_URL}}"
+							],
+							"path": [
+								"publishers",
+								"{{PUBLISHER_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{JWT_TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "076a6bb2-b281-40e0-a360-1512fa089ee6",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "dd0af70a-2e84-4257-a709-ef6280be6365",
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Date is present\", function () {",
+					"    pm.response.to.have.header(\"Date\");",
+					"});",
+					"",
+					"if (responseCode.code !== 204 && responseCode.code !==304) {",
+					"pm.test(\"Content-Type is present\", function () {",
+					"    pm.response.to.have.header(\"Content-Type\");",
+					"});",
+					"pm.test(\"Etag is present\", function () {",
+					"    pm.response.to.have.header(\"Etag\");",
+					"});",
+					"pm.test(\"Content-Type is application/json\", function () {",
+					"    pm.expect(postman.getResponseHeader(\"Content-Type\")).to.contain(\"application/json\");",
+					"});",
+					"}",
+					"if (responseCode.code === 200) {",
+					"    const jsonData = pm.response.json()",
+					"pm.test(\"_links field is present\", function () {",
+					"    if (jsonData.items) {",
+					"        pm.expect(jsonData.items[0]._links).to.exist;",
+					"    } else {",
+					"        pm.expect(jsonData._links).to.exist;",
+					"    }",
+					"});",
+					"}",
+					"const statusCategory = responseCode.code.toString()[0]",
+					"if (statusCategory === '4' || statusCategory === '5') {",
+					"    pm.test(\"Body contains error property\", function () {",
+					"    const jsonData = pm.response.json()",
+					"    pm.expect(jsonData).to.have.property('error')",
+					"    pm.expect(jsonData).to.have.nested.property('error.code')",
+					"    pm.expect(jsonData).to.have.nested.property('error.message')",
+					"})",
+					"}",
+					"if (responseCode.code === 401) {",
+					"    pm.test(\"401 also has WWW-authenticate header\", function () {",
+					"    pm.expect(postman.getResponseHeader(\"WWW-Authenticate\")).to.contain(\"Bearer\");",
+					"    })",
+					"}"
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

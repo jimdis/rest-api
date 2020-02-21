@@ -7,12 +7,13 @@
   "author": "Jim Disenstam",
   "license": "MIT",
   "scripts": {
-    "start-db": "docker run -d -p 5432:5432 -v postgres-data:/var/lib/postgresql/data -e POSTGRES_PASSWORD=docker --name postgres-docker postgres",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "newman run 1dv527.postman_collection.json -e 1DV527_ENV.postman_environment.json"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
+    "newman": "^4.5.7",
     "nodemon": "^2.0.2"
   },
   "dependencies": {
