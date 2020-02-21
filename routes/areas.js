@@ -23,7 +23,7 @@ router
       return res.json({
         items: areas.map(a => ({
           ...a,
-          _links: createLinks.area(req, a),
+          _links: createLinks.area(a),
         })),
       })
     } catch (e) {
@@ -45,7 +45,7 @@ router
       }
       return res.json({
         ...area,
-        _links: createLinks.area(req, area),
+        _links: createLinks.area(area),
       })
     } catch (e) {
       next(e)
@@ -68,7 +68,7 @@ router
         items: publishers.map(p => {
           return {
             ...p,
-            _links: createLinks.publisher(req, p),
+            _links: createLinks.publisher(p),
           }
         }),
       })
@@ -93,7 +93,7 @@ router
         items: ads.map(ad => {
           return {
             ...ad,
-            _links: createLinks.ad(req, ad),
+            _links: createLinks.ad(ad),
           }
         }),
       })

@@ -41,7 +41,7 @@ router
           accessToken: token,
           tokenType: 'bearer',
           expiresIn: 600,
-          _links: createLinks.publisher(req, publisher),
+          _links: createLinks.publisher(publisher),
         })
     } catch (e) {
       next(e)

@@ -6,6 +6,7 @@
 const express = require('express')
 const router = express.Router()
 const allow = require('../middleware/allow').addAllow
+const BASE_URL = require('../config/url')
 
 router
   .route('/')
@@ -13,13 +14,12 @@ router
   // Get Links
   .get(async (req, res, next) => {
     try {
-      const baseUrl = req.protocol + '://' + req.get('host')
       return res.json({
         _links: {
-          publishers: baseUrl + '/publishers',
-          ads: baseUrl + '/ads',
-          areas: baseUrl + '/areas',
-          auth: baseUrl + '/auth',
+          publishers: BASE_URL + '/publishers',
+          ads: BASE_URL + '/ads',
+          areas: BASE_URL + '/areas',
+          auth: BASE_URL + '/auth',
         },
       })
     } catch (e) {

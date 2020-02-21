@@ -5,6 +5,7 @@
  */
 
 const jwt = require('../lib/jwt')
+const BASE_URL = require('../config/url')
 
 /**
  * Checks header for 'Authorization' and verifies Bearer token.
@@ -25,7 +26,7 @@ const auth = async (req, res, next) => {
     req.token = decoded
     next()
   } catch (e) {
-    const authUrl = req.protocol + '://' + req.get('host') + '/auth'
+    const authUrl = BASE_URL + '/auth'
     return res
       .status(401)
       .header('WWW-Authenticate', 'Bearer')

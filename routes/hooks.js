@@ -27,7 +27,7 @@ router
         items: hooks.map(h => {
           return {
             ...h,
-            _links: createLinks.hook(req, h),
+            _links: createLinks.hook(h),
           }
         }),
       })
@@ -46,7 +46,7 @@ router
       const { action, callback } = req.body
       let hook = new Hook({ action, callback, publisher: id })
       hook = await hook.save()
-      const links = createLinks.hook(req, hook)
+      const links = createLinks.hook(hook)
       hook = hook.toObject()
       return res
         .status(201)
@@ -78,7 +78,7 @@ router
       }
       return res.json({
         ...hook,
-        _links: createLinks.hook(req, hook),
+        _links: createLinks.hook(hook),
       })
     } catch (e) {
       next(e)
@@ -107,7 +107,7 @@ router
       hook = hook.toObject()
       return res.json({
         ...hook,
-        _links: createLinks.hook(req, hook),
+        _links: createLinks.hook(hook),
       })
     } catch (e) {
       next(e)

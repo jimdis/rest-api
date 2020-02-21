@@ -13,6 +13,7 @@ const ForbiddenError = require('../errors/ForbiddenError')
 const createLinks = require('../lib/createLinks')
 const runHook = require('../lib/runHook')
 const actions = require('../lib/types').webhookActions
+const BASE_URL = require('../config/url')
 
 router
   .route('/')
@@ -59,13 +60,10 @@ router
       return res.json({
         totalCount: count,
         itemCount: count > limit ? limit : count,
-        next:
-          count > limit
-            ? `${req.protocol}://${req.get('host')}${newUrl}`
-            : undefined,
+        next: count > limit ? `${BASE_URL}${newUrl}` : undefined,
         items: ads.map(ad => ({
           ...ad,
-          _links: createLinks.ad(req, ad),
+          _links: createLinks.ad(ad),
         })),
       })
     } catch (e) {
@@ -89,7 +87,7 @@ router
       ad = await ad.save()
       ad = ad.toObject()
       runHook(actions.newAd, ad)
-      const links = createLinks.ad(req, ad)
+      const links = createLinks.ad(ad)
       return res
         .status(201)
         .header('Location', links.self)
@@ -115,7 +113,7 @@ router
       }
       return res.json({
         ...ad,
-        _links: createLinks.ad(req, ad),
+        _links: createLinks.ad(ad),
       })
     } catch (e) {
       next(e)
@@ -142,7 +140,7 @@ router
       ad = await ad.save()
 
       ad = ad.toObject()
-      return res.json({ ...ad, _links: createLinks.ad(req, ad) })
+      return res.json({ ...ad, _links: createLinks.ad(ad) })
     } catch (e) {
       next(e)
     }
